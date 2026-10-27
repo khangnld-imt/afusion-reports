@@ -10,5 +10,11 @@
   "updated": "2026-10-27T11:57:26+07:00",
   "url": "https://khangnld-imt.github.io/afusion-reports/smoke/",
   "summary": "connectivity check"
+ },
+ "dsm": {
+  "title": "DSM \u2014 27 Oct 2026",
+  "updated": "2026-10-27T12:01:03+07:00",
+  "url": "https://khangnld-imt.github.io/afusion-reports/dsm/",
+  "summary": "Sprint 7 \u00b7 2 done, 8 next"
  }
 }
