@@ -4,5 +4,11 @@
   "updated": "2026-10-27T11:56:16+07:00",
   "url": "https://khangnld-imt.github.io/afusion-reports/_smoke/",
   "summary": "connectivity check"
+ },
+ "smoke": {
+  "title": "Smoke test",
+  "updated": "2026-10-27T11:57:26+07:00",
+  "url": "https://khangnld-imt.github.io/afusion-reports/smoke/",
+  "summary": "connectivity check"
  }
 }
