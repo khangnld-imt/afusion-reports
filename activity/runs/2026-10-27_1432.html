@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daily Activity — 2026.10.27</title>
+<style>
+:root{--bg:#12161b;--card:#1b2129;--line:#2a323c;--fg:#e6ebf2;--mut:#93a0b0;
+--green:#3ddc84;--amber:#f0b429;--blue:#5aa9ff;--red:#ff6b6b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+font:15px/1.55 "Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding:34px 20px}
+.wrap{max-width:980px;margin:0 auto}
+header{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+h1{margin:0 0 7px;font-size:26px;letter-spacing:-.35px;font-weight:650}
+.sub{color:var(--mut);font-size:13px}
+.sub b{color:#c3ccd8;font-weight:600}
+.kpis{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 8px}
+.kpi{flex:1 1 140px;background:var(--card);border:1px solid var(--line);
+border-radius:10px;padding:13px 16px}
+.kpi .n{font-size:23px;font-weight:650;letter-spacing:-.6px}
+.kpi .n small{color:var(--mut);font-size:14px;font-weight:500}
+.kpi .l{color:var(--mut);font-size:11.5px;text-transform:uppercase;
+letter-spacing:.07em;margin-top:2px}
+.kpi.red .n{color:var(--red)} .kpi.green .n{color:var(--green)}
+.kpi.blue .n{color:var(--blue)}
+h2{font-size:16px;margin:30px 0 10px;display:flex;align-items:center;gap:9px;font-weight:600}
+h2 .bar{width:4px;height:17px;border-radius:2px;background:var(--blue);flex:none}
+h2.g .bar{background:var(--green)} h2.a .bar{background:var(--amber)}
+h2.r .bar{background:var(--red)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+margin:14px 0;overflow:hidden}
+.chead{display:flex;align-items:center;justify-content:space-between;gap:12px;
+flex-wrap:wrap;padding:13px 16px;border-bottom:1px solid var(--line)}
+.chead h2{margin:0;font-size:15.5px}
+.badges{display:flex;gap:7px;flex-wrap:wrap}
+.bd{font-size:11.5px;padding:2px 8px;border-radius:20px;border:1px solid var(--line);
+background:#232b35;color:#c3ccd8;white-space:nowrap}
+.bd.b-green{color:var(--green);border-color:#1d4030}
+.bd.b-blue{color:var(--blue);border-color:#1b3348}
+.bd.b-amber{color:var(--amber);border-color:#43360f}
+.bd.b-red{color:var(--red);border-color:#4a1f1f}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+tr.blk td{background:#241a1c}
+td.g{width:36px;text-align:center;font-size:13px;padding-right:0}
+td.id{width:78px;white-space:nowrap;font-variant-numeric:tabular-nums}
+td.id a{color:var(--blue);text-decoration:none;font-weight:600}
+td.id a:hover{text-decoration:underline}
+td.pj{width:96px;padding-right:0;white-space:nowrap}
+td.tt{padding-left:0}
+td.val{width:88px;text-align:right;white-space:nowrap;font-weight:650;
+font-variant-numeric:tabular-nums}
+.val.green{color:var(--green)} .val.amber{color:var(--amber)}
+.val.blue{color:var(--blue)} .val.grey{color:var(--mut);font-weight:500}
+.proj{display:inline-block;max-width:86px;background:#232b35;border:1px solid var(--line);
+border-radius:5px;padding:0 6px;font-size:11.5px;color:#c3ccd8;text-align:center;
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis;vertical-align:1px;
+box-sizing:border-box;width:100%}
+.meta{color:#a8b4c4;font-size:12px;margin-top:4px}
+.empty{color:var(--mut);font-style:italic}
+ul.blk{list-style:none;padding:14px 16px;margin:0;background:var(--card);
+border:1px solid var(--line);border-radius:10px}
+ul.blk li{padding:6px 0;border-bottom:1px solid var(--line)}
+ul.blk li:last-child{border-bottom:0}
+ul.blk.red{border-color:#4a1f1f;background:#1d1618}
+ul.blk a{color:var(--blue);text-decoration:none;font-weight:600}
+.q{color:#c3ccd8;font-size:13px;margin-top:3px;font-style:italic}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;
+margin-right:9px;vertical-align:1px}
+.dot.green{background:var(--green)}
+.warn{margin:0;padding:10px 16px;border-top:1px solid #4a3a14;background:#241f14;
+color:#f0c674;font-size:12.5px}
+.warn a{color:#f0c674}
+.idle{color:var(--mut);font-size:13px;margin-top:20px}
+footer{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);
+color:var(--mut);font-size:12px}
+@media print{body{background:#fff;color:#111;padding:0}
+.kpi,.card,ul.blk{background:#fff;border-color:#ddd}
+td{border-color:#eee} .proj{background:#f2f2f2;color:#333}
+tr.blk td{background:#fff5f5} .warn{background:#fffbe8;border-color:#e6d9a8;color:#7a5c00}
+h1,h2{color:#111}}
+</style></head><body><div style="background:#101c2b;color:#dbe6f2;font:12.5px/1.6 'Segoe UI',-apple-system,Roboto,Arial,sans-serif;padding:9px 20px;text-align:center">Archived run <b>2026-10-27 · 14:32</b> — frozen snapshot · <a href="../" style="color:#8fbaff;text-decoration:none">latest activity report →</a> · <a href="../../" style="color:#8fbaff;text-decoration:none">all reports</a></div><div class="wrap">
+<header>
+<h1>Daily Activity — 2026.10.27</h1>
+<div class="sub">AFusion &nbsp;·&nbsp; <b>Sprint 7</b>
+(2026-10-26 → 2026-11-06)
+&nbsp;·&nbsp; window 00:00–14:32 (UTC+7)
+&nbsp;·&nbsp; created / completed / started today, per member</div>
+</header>
+
+<div class="kpis">
+<div class="kpi blue"><div class="n">17</div><div class="l">Created today</div></div>
+<div class="kpi green"><div class="n">9</div><div class="l">Completed today</div></div>
+<div class="kpi"><div class="n">9</div><div class="l">Moved to in-progress</div></div>
+<div class="kpi red"><div class="n">0</div><div class="l">Blockers</div></div>
+<div class="kpi"><div class="n">10<small>/12</small></div>
+<div class="l">Members active</div></div>
+</div>
+
+<h2 class="g"><span class="bar"></span>Blockers to acknowledge</h2><ul class="blk"><li><span class="dot green"></span>None reported today.</li></ul>
+
+<div class="card">
+<div class="chead"><h2>Khang Nguyen Le Dinh</h2><div class="badges"><span class="bd b-green">3 completed</span><span class="bd b-blue">3 created</span><span class="bd b-amber">1 started</span></div></div>
+<table><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60989">#60989</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[HC] [GB] Update tax portal list invoice downloading API param and adjust the invoice range within 10 days<div class="meta">Task · Done</div></td><td class="val green">(0/2)</td></tr><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60751">#60751</a></td><td class="pj"><span class="proj">Maxim</span></td><td class="tt">Manual test run to check all core feature from downloading and posting invoices<div class="meta">Task · Done</div></td><td class="val green">(0/8)</td></tr><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60977">#60977</a></td><td class="pj"><span class="proj">Maxim</span></td><td class="tt">Strong verify and test suite builder for downloading/matching/posting invoice<div class="meta">Task · Done</div></td><td class="val green">(0/4)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60970">#60970</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[GB] Booking thiếu vat_amount<div class="meta">Defect · New</div></td><td class="val grey">(—)</td></tr><tr><td class="g">▶️</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60692">#60692</a></td><td class="pj"><span class="proj">HC</span></td><td class="tt">[HC] Lấy thông tin customer code sai so với invoice=&gt; không download đc<div class="meta">Defect · In Progress</div></td><td class="val amber">(2/2)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Ngan Pham Thi Bich</h2><div class="badges"><span class="bd b-green">2 completed</span><span class="bd b-blue">2 created</span><span class="bd b-amber">2 started</span></div></div>
+<table><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60763">#60763</a></td><td class="pj"><span class="proj">HC</span></td><td class="tt">[QC] Check issue leases 26/10 from customer<div class="meta">Task · Done</div></td><td class="val green">(0/4)</td></tr><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60750">#60750</a></td><td class="pj"><span class="proj">Phuc Long</span></td><td class="tt">[QC] Regression test to prepare demo<div class="meta">Task · Done</div></td><td class="val green">(0/4)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60973">#60973</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[GB] Check result vendor portal for Oct Month<div class="meta">Task · In Progress</div></td><td class="val blue">(4/4)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60999">#60999</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[HC&amp;GB] Check update download invoice from MTT<div class="meta">Task · In Progress</div></td><td class="val blue">(2/2)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Khanh Dinh Quoc</h2><div class="badges"><span class="bd b-green">2 completed</span><span class="bd b-blue">2 created</span></div></div>
+<table><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60997">#60997</a></td><td class="pj"><span class="proj">Cholimex</span></td><td class="tt">[Cholimex] [Dev] Refactor MailWorkflow for per-file order processing, retry state persistence, and final failure alert<div class="meta">Task · Done</div></td><td class="val green">(0/4)</td></tr><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60991">#60991</a></td><td class="pj"><span class="proj">Starbucks</span></td><td class="tt">[Starbucks] [Dev] Exclude Management Fee items for COMMERCIAL-RT-07 in fee notification<div class="meta">Task · Done</div></td><td class="val green">(0/2)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Khanh Le Gia</h2><div class="badges"><span class="bd b-green">1 completed</span><span class="bd b-blue">1 created</span><span class="bd b-amber">1 started</span></div></div>
+<table><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60764">#60764</a></td><td class="pj"><span class="proj">Vistra</span></td><td class="tt">[WF1] Check issue logs from customers 26/10/2026<div class="meta">Task · Done</div></td><td class="val green">(0/4)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60974">#60974</a></td><td class="pj"><span class="proj">Vistra</span></td><td class="tt">[WF1] Check issue logs from customers 27/10/2026<div class="meta">Task · In Progress</div></td><td class="val blue">(8/8)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Vinh Ly The</h2><div class="badges"><span class="bd b-green">1 completed</span><span class="bd b-blue">0 created</span></div></div>
+<table><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60701">#60701</a></td><td class="pj"><span class="proj">KBE</span></td><td class="tt">Handle feedback 26-10-2026<div class="meta">Task · Done</div></td><td class="val green">(0/8)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Phong Phan Hoai</h2><div class="badges"><span class="bd b-green">0 completed</span><span class="bd b-blue">3 created</span><span class="bd b-amber">1 started</span></div></div>
+<table><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60968">#60968</a></td><td class="pj"><span class="proj">Bestway</span></td><td class="tt">[QC] Re-check logic identify period<div class="meta">Task · To Do</div></td><td class="val blue">(2/2)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60969">#60969</a></td><td class="pj"><span class="proj">Bestway</span></td><td class="tt">[QC] Re-check generate report and distribute<div class="meta">Task · To Do</div></td><td class="val blue">(6/6)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60994">#60994</a></td><td class="pj"><span class="proj">Bestway</span></td><td class="tt">[QC] Review and Update Keywords in Master Data<div class="meta">Task · In Progress</div></td><td class="val blue">(8/8)</td></tr></table>
+<div class="warn">No movement ≥ 3 days on <a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60003">#60003</a></div>
+</div>
+<div class="card">
+<div class="chead"><h2>Thuong Le Anh</h2><div class="badges"><span class="bd b-green">0 completed</span><span class="bd b-blue">3 created</span><span class="bd b-amber">1 started</span></div></div>
+<table><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60986">#60986</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[HC] [D365] Fix duplicate invoice number when existing special-character suffixes are already used<div class="meta">Task · To Do</div></td><td class="val grey">(—)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60987">#60987</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[HC] Extract Sales Invoices from July to September 2026<div class="meta">Task · In Progress</div></td><td class="val grey">(—)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60988">#60988</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[HC] Extract Purchase Invoices for Customer-Provided Vendors (YTD 2026)<div class="meta">Task · To Do</div></td><td class="val grey">(—)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Sang Luong Tan</h2><div class="badges"><span class="bd b-green">0 completed</span><span class="bd b-blue">1 created</span><span class="bd b-amber">2 started</span></div></div>
+<table><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60972">#60972</a></td><td class="pj"><span class="proj">Sofresh</span></td><td class="tt">Add column &quot;Assign to customer&quot; for invidual line item<div class="meta">Task · In Progress</div></td><td class="val blue">(4/4)</td></tr><tr><td class="g">▶️</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60708">#60708</a></td><td class="pj"><span class="proj">Vistra</span></td><td class="tt">[WF3] Fix issue 84,86,87<div class="meta">Task · In Progress</div></td><td class="val amber">(4/4)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Hung Tran My</h2><div class="badges"><span class="bd b-green">0 completed</span><span class="bd b-blue">1 created</span><span class="bd b-amber">1 started</span></div></div>
+<table><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60949">#60949</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[KBE] [QC] Check summary the October data: Total number of jobs. Number of jobs with the correct and complete set of…<div class="meta">Task · In Progress</div></td><td class="val blue">(8/8)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>(Unassigned)</h2><div class="badges"><span class="bd b-green">0 completed</span><span class="bd b-blue">1 created</span></div></div>
+<table><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60993">#60993</a></td><td class="pj"><span class="proj">Bestway</span></td><td class="tt">UAT Feedback<div class="meta">Product Backlog Item · New</div></td><td class="val grey">(—)</td></tr></table>
+
+</div>
+<p class="idle"><b>No board activity today:</b> Hung Hoang (11 open), Ngoc Nguyen Thi Bich (1 open)</p>
+<footer>Generated by Board Hygiene &nbsp;·&nbsp; Azure DevOps Server AFusion
+&nbsp;·&nbsp; 2026-10-27 14:32 &nbsp;·&nbsp;
+completed = ClosedDate in window (ChangedDate is bumped by the RW-zeroing job) &nbsp;·&nbsp;
+blocker = blocked flag/tag or blocker wording in today's history comment &nbsp;·&nbsp;
+hours shown as (remaining/estimate)</footer>
+</div></body></html>
