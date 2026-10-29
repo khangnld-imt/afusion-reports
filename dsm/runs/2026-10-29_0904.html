@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Khang Nguyen — DSM 2026.10.29</title>
+<style>
+:root{--bg:#12161b;--card:#1b2129;--line:#2a323c;--fg:#e6ebf2;--mut:#93a0b0;
+--green:#3ddc84;--amber:#f0b429;--blue:#5aa9ff;--red:#ff6b6b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+font:15px/1.55 "Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding:34px 20px}
+.wrap{max-width:900px;margin:0 auto}
+header{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+h1{margin:0 0 7px;font-size:26px;letter-spacing:-.35px;font-weight:650}
+.sub{color:var(--mut);font-size:13px}
+.sub b{color:#c3ccd8;font-weight:600}
+.kpis{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 8px}
+.kpi{flex:1 1 150px;background:var(--card);border:1px solid var(--line);
+border-radius:10px;padding:13px 16px}
+.kpi .n{font-size:23px;font-weight:650;letter-spacing:-.6px}
+.kpi .n small{color:var(--mut);font-size:14px;font-weight:500}
+.kpi .l{color:var(--mut);font-size:11.5px;text-transform:uppercase;
+letter-spacing:.07em;margin-top:2px}
+h2{font-size:16px;margin:32px 0 10px;display:flex;align-items:center;gap:9px;font-weight:600}
+h2 .bar{width:4px;height:17px;border-radius:2px;background:var(--blue);flex:none}
+h2.g .bar{background:var(--green)} h2.a .bar{background:var(--amber)}
+h2.r .bar{background:var(--red)}
+table{width:100%;border-collapse:collapse;background:var(--card);
+border:1px solid var(--line);border-radius:10px;overflow:hidden}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.id{width:80px;white-space:nowrap;font-variant-numeric:tabular-nums}
+td.id a{color:var(--blue);text-decoration:none;font-weight:600}
+td.id a:hover{text-decoration:underline}
+td.pj{width:100px;padding-right:0;white-space:nowrap}
+td.tt{padding-left:0}
+td.val{width:92px;text-align:right;white-space:nowrap;font-weight:650;
+font-variant-numeric:tabular-nums}
+.val.green{color:var(--green)} .val.amber{color:var(--amber)}
+.val.blue{color:var(--blue)} .val.grey{color:var(--mut);font-weight:500}
+.proj{display:inline-block;max-width:88px;background:#232b35;border:1px solid var(--line);
+border-radius:5px;padding:0 6px;font-size:11.5px;color:#c3ccd8;
+text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+vertical-align:1px;box-sizing:border-box;width:100%}
+.meta{color:#a8b4c4;font-size:12px;margin-top:4px}
+.empty{color:var(--mut);font-style:italic}
+ul.blk{list-style:none;padding:14px 16px;margin:0;background:var(--card);
+border:1px solid var(--line);border-radius:10px}
+ul.blk li{padding:4px 0}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;
+margin-right:9px;vertical-align:1px}
+.dot.red{background:var(--red)} .dot.green{background:var(--green)}
+.warn{margin-top:26px;padding:12px 15px;border-radius:9px;
+background:#241f14;border:1px solid #4a3a14;color:#f0c674;font-size:13px}
+footer{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);
+color:var(--mut);font-size:12px}
+@media print{body{background:#fff;color:#111;padding:0}
+.kpi,table,ul.blk{background:#fff;border-color:#ddd}
+td{border-color:#eee} .proj{background:#f2f2f2;color:#333}
+.warn{background:#fffbe8;border-color:#e6d9a8;color:#7a5c00}
+h1,h2{color:#111}}
+</style></head><body><div style="background:#101c2b;color:#dbe6f2;font:12.5px/1.6 'Segoe UI',-apple-system,Roboto,Arial,sans-serif;padding:9px 20px;text-align:center">Archived run <b>2026-10-29 · 09:04</b> — frozen snapshot · <a href="../" style="color:#8fbaff;text-decoration:none">latest dsm report →</a> · <a href="../../" style="color:#8fbaff;text-decoration:none">all reports</a></div><div class="wrap">
+<header>
+<h1>Khang Nguyen’s Report — 2026.10.29</h1>
+<div class="sub">Daily Scrum Meeting &nbsp;·&nbsp; <b>Sprint 7</b>
+(2026-10-26 → 2026-11-06) &nbsp;·&nbsp;
+since last DSM <b>2026.10.28</b></div>
+</header>
+
+<div class="kpis">
+<div class="kpi"><div class="n">1</div>
+<div class="l">Items completed</div></div>
+<div class="kpi"><div class="n">4<small>h / 4h</small></div>
+<div class="l">Hours closed</div></div>
+<div class="kpi"><div class="n">21</div>
+<div class="l">Open in sprint</div></div>
+<div class="kpi"><div class="n">90<small>h</small></div>
+<div class="l">Remaining estimate</div></div>
+</div>
+
+<h2 class="g"><span class="bar"></span>1. What have you done since the last DSM?</h2>
+<table><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60970">#60970</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[GB] Booking thiếu vat_amount<div class="meta">Defect · Done</div></td><td class="val green">(0/4)</td></tr></table>
+
+<h2 class="a"><span class="bar"></span>2. What do you intend to do before the next DSM</h2>
+<table><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60099">#60099</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">[AI Agent Server] Write software &amp; hardware requirements document (PDF) for machines hosting the Application Agent<div class="meta">Task · In Progress</div></td><td class="val blue">(1/8)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61142">#61142</a></td><td class="pj"><span class="proj">Maxim</span></td><td class="tt">Orchestrator PO board setting up for human in the loop activities<div class="meta">Task · In Progress</div></td><td class="val blue">(4/4)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61052">#61052</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Define and migrate Metric Catalog and Data Contract tables<div class="meta">Task · To Do</div></td><td class="val blue">(4/4)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61053">#61053</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Catalog and Data Contract CRUD API with versioning<div class="meta">Task · To Do</div></td><td class="val blue">(6/6)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61054">#61054</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">PO catalog template and import with row-error report<div class="meta">Task · To Do</div></td><td class="val blue">(6/6)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61055">#61055</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Metric resolution gate service (every metric must have source)<div class="meta">Task · To Do</div></td><td class="val blue">(4/4)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61056">#61056</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Collect approved catalogs for DxR, JH, KBE (PO task)<div class="meta">Task · To Do</div></td><td class="val blue">(4/4)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61057">#61057</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Tenant Setting storage + API: generation prompt, suggestions, schedule (no truncation)<div class="meta">Task · To Do</div></td><td class="val blue">(4/4)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61058">#61058</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Tenant Setting UI: Prompts &amp; Schedule section<div class="meta">Task · To Do</div></td><td class="val blue">(6/6)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61059">#61059</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Suggestion config consumption with staleness rules<div class="meta">Task · To Do</div></td><td class="val blue">(2/2)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61060">#61060</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Permission epoch mechanism for per-request permission freshness<div class="meta">Task · To Do</div></td><td class="val blue">(6/6)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61061">#61061</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Permission-scoped cache keys for insight data paths<div class="meta">Task · To Do</div></td><td class="val blue">(4/4)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61062">#61062</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Data-scope rule model for records, drill-downs and exports<div class="meta">Task · To Do</div></td><td class="val blue">(8/8)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61063">#61063</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">New permission constants + activation roles<div class="meta">Task · To Do</div></td><td class="val blue">(2/2)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61064">#61064</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Snapshot entities, storage layout and retention<div class="meta">Task · To Do</div></td><td class="val blue">(4/4)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61066">#61066</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Manual Refresh with last-verified-refresh semantics<div class="meta">Task · To Do</div></td><td class="val blue">(4/4)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58424">#58424</a></td><td class="pj"><span class="proj">HC</span></td><td class="tt">[Dispatcher] Thấy xử lý tìm account code, store code bước download và next run trên ap tracker k chạy lại<div class="meta">Defect · New</div></td><td class="val blue">(2/2)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60692">#60692</a></td><td class="pj"><span class="proj">HC</span></td><td class="tt">[HC] Lấy thông tin customer code sai so với invoice=&gt; không download đc<div class="meta">Defect · New</div></td><td class="val blue">(2/2)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60760">#60760</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">Vendor Portal manual checking issue resolving<div class="meta">Task · To Do</div></td><td class="val blue">(4/4)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60790">#60790</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[HC] Download file vendor portal từ prod về auto<div class="meta">Defect · New</div></td><td class="val blue">(2/2)</td></tr><tr><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60934">#60934</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[HC] [GB] Attention notification for all workflows<div class="meta">Task · To Do</div></td><td class="val blue">(4/4)</td></tr></table>
+
+<h2 class="r"><span class="bar"></span>3. Do you have any issue which block your work?</h2>
+<ul class="blk"><li><span class="dot green"></span>(None)</li></ul>
+
+<footer>Generated by Board Hygiene for Khang Nguyen Le Dinh &nbsp;·&nbsp;
+Azure DevOps Server AFusion &nbsp;·&nbsp;
+2026-10-29 09:04 &nbsp;·&nbsp;
+Progress shown as (completed / estimated) hours.</footer>
+</div></body></html>
