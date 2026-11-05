@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daily Activity — 2026.11.05</title>
+<style>
+:root{--bg:#12161b;--card:#1b2129;--line:#2a323c;--fg:#e6ebf2;--mut:#93a0b0;
+--green:#3ddc84;--amber:#f0b429;--blue:#5aa9ff;--red:#ff6b6b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+font:15px/1.55 "Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding:34px 20px}
+.wrap{max-width:980px;margin:0 auto}
+header{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+h1{margin:0 0 7px;font-size:26px;letter-spacing:-.35px;font-weight:650}
+.sub{color:var(--mut);font-size:13px}
+.sub b{color:#c3ccd8;font-weight:600}
+.kpis{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 8px}
+.kpi{flex:1 1 140px;background:var(--card);border:1px solid var(--line);
+border-radius:10px;padding:13px 16px}
+.kpi .n{font-size:23px;font-weight:650;letter-spacing:-.6px}
+.kpi .n small{color:var(--mut);font-size:14px;font-weight:500}
+.kpi .l{color:var(--mut);font-size:11.5px;text-transform:uppercase;
+letter-spacing:.07em;margin-top:2px}
+.kpi.red .n{color:var(--red)} .kpi.green .n{color:var(--green)}
+.kpi.blue .n{color:var(--blue)}
+h2{font-size:16px;margin:30px 0 10px;display:flex;align-items:center;gap:9px;font-weight:600}
+h2 .bar{width:4px;height:17px;border-radius:2px;background:var(--blue);flex:none}
+h2.g .bar{background:var(--green)} h2.a .bar{background:var(--amber)}
+h2.r .bar{background:var(--red)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+margin:14px 0;overflow:hidden}
+.chead{display:flex;align-items:center;justify-content:space-between;gap:12px;
+flex-wrap:wrap;padding:13px 16px;border-bottom:1px solid var(--line)}
+.chead h2{margin:0;font-size:15.5px}
+.badges{display:flex;gap:7px;flex-wrap:wrap}
+.bd{font-size:11.5px;padding:2px 8px;border-radius:20px;border:1px solid var(--line);
+background:#232b35;color:#c3ccd8;white-space:nowrap}
+.bd.b-green{color:var(--green);border-color:#1d4030}
+.bd.b-blue{color:var(--blue);border-color:#1b3348}
+.bd.b-amber{color:var(--amber);border-color:#43360f}
+.bd.b-red{color:var(--red);border-color:#4a1f1f}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+tr.blk td{background:#241a1c}
+td.g{width:36px;text-align:center;font-size:13px;padding-right:0}
+td.id{width:78px;white-space:nowrap;font-variant-numeric:tabular-nums}
+td.id a{color:var(--blue);text-decoration:none;font-weight:600}
+td.id a:hover{text-decoration:underline}
+td.pj{width:96px;padding-right:0;white-space:nowrap}
+td.tt{padding-left:0}
+td.val{width:88px;text-align:right;white-space:nowrap;font-weight:650;
+font-variant-numeric:tabular-nums}
+.val.green{color:var(--green)} .val.amber{color:var(--amber)}
+.val.blue{color:var(--blue)} .val.grey{color:var(--mut);font-weight:500}
+.proj{display:inline-block;max-width:86px;background:#232b35;border:1px solid var(--line);
+border-radius:5px;padding:0 6px;font-size:11.5px;color:#c3ccd8;text-align:center;
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis;vertical-align:1px;
+box-sizing:border-box;width:100%}
+.meta{color:#a8b4c4;font-size:12px;margin-top:4px}
+.empty{color:var(--mut);font-style:italic}
+ul.blk{list-style:none;padding:14px 16px;margin:0;background:var(--card);
+border:1px solid var(--line);border-radius:10px}
+ul.blk li{padding:6px 0;border-bottom:1px solid var(--line)}
+ul.blk li:last-child{border-bottom:0}
+ul.blk.red{border-color:#4a1f1f;background:#1d1618}
+ul.blk a{color:var(--blue);text-decoration:none;font-weight:600}
+.q{color:#c3ccd8;font-size:13px;margin-top:3px;font-style:italic}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;
+margin-right:9px;vertical-align:1px}
+.dot.green{background:var(--green)}
+.warn{margin:0;padding:10px 16px;border-top:1px solid #4a3a14;background:#241f14;
+color:#f0c674;font-size:12.5px}
+.warn a{color:#f0c674}
+.idle{color:var(--mut);font-size:13px;margin-top:20px}
+footer{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);
+color:var(--mut);font-size:12px}
+@media print{body{background:#fff;color:#111;padding:0}
+.kpi,.card,ul.blk{background:#fff;border-color:#ddd}
+td{border-color:#eee} .proj{background:#f2f2f2;color:#333}
+tr.blk td{background:#fff5f5} .warn{background:#fffbe8;border-color:#e6d9a8;color:#7a5c00}
+h1,h2{color:#111}}
+</style></head><body><div style="background:#101c2b;color:#dbe6f2;font:12.5px/1.6 'Segoe UI',-apple-system,Roboto,Arial,sans-serif;padding:9px 20px;text-align:center">Archived run <b>2026-11-05 · 19:56</b> — frozen snapshot · <a href="../" style="color:#8fbaff;text-decoration:none">latest activity report →</a> · <a href="../../" style="color:#8fbaff;text-decoration:none">all reports</a></div><div class="wrap">
+<header>
+<h1>Daily Activity — 2026.11.05</h1>
+<div class="sub">AFusion &nbsp;·&nbsp; <b>Sprint 7</b>
+(2026-10-26 → 2026-11-06)
+&nbsp;·&nbsp; window 00:00–19:54 (UTC+7)
+&nbsp;·&nbsp; created / completed / started today, per member</div>
+</header>
+
+<div class="kpis">
+<div class="kpi blue"><div class="n">24</div><div class="l">Created today</div></div>
+<div class="kpi green"><div class="n">18</div><div class="l">Completed today</div></div>
+<div class="kpi"><div class="n">14</div><div class="l">Moved to in-progress</div></div>
+<div class="kpi red"><div class="n">0</div><div class="l">Blockers</div></div>
+<div class="kpi"><div class="n">13<small>/14</small></div>
+<div class="l">Members active</div></div>
+</div>
+
+<h2 class="g"><span class="bar"></span>Blockers to acknowledge</h2><ul class="blk"><li><span class="dot green"></span>None reported today.</li></ul>
+
+<div class="card">
+<div class="chead"><h2>Thuong Le Anh</h2><div class="badges"><span class="bd b-green">1 completed</span><span class="bd b-blue">0 created</span></div></div>
+<table><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61840">#61840</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[HC] 4.11.2026 Extract invoice data from HDDT by customer request<div class="meta">Task · Done</div></td><td class="val green">(0/4)</td></tr></table>
+<div class="warn">No movement ≥ 3 days on <a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60386">#60386</a></div>
+</div>
+<div class="card">
+<div class="chead"><h2>Nhan Pham Vu Phuc</h2><div class="badges"><span class="bd b-green">4 completed</span><span class="bd b-blue">1 created</span><span class="bd b-amber">1 started</span></div></div>
+<table><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59872">#59872</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Workflow Research<div class="meta">Product Backlog Item · Done</div></td><td class="val grey">(—)</td></tr><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60345">#60345</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Read project requirements of Maxim, Highlands, Vistra VN, and Vistra TL<div class="meta">Task · Done</div></td><td class="val green">(0/12)</td></tr><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61100">#61100</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">[Exception Workbench] Review tickets<div class="meta">Task · Done</div></td><td class="val green">(0/1)</td></tr><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61179">#61179</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">[Bank Reconciliation] Research workflow when payment is handled outside ERP<div class="meta">Task · Done</div></td><td class="val green">(0/8)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62004">#62004</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Research how to enhance Review and Exception screens<div class="meta">Task · In Progress</div></td><td class="val blue">(8/12)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Phong Phan Hoai</h2><div class="badges"><span class="bd b-green">4 completed</span><span class="bd b-blue">1 created</span><span class="bd b-amber">1 started</span></div></div>
+<table><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55483">#55483</a></td><td class="pj"><span class="proj">Bestway</span></td><td class="tt">AI Content Reading &amp; File Naming per Convention<div class="meta">Product Backlog Item · Done</div></td><td class="val grey">(—)</td></tr><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61991">#61991</a></td><td class="pj"><span class="proj">Bestway</span></td><td class="tt">[QC] Check result UAT 4/11<div class="meta">Task · Done</div></td><td class="val green">(0/4)</td></tr><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58397">#58397</a></td><td class="pj"><span class="proj">Sofresh</span></td><td class="tt">[QC] Check post invoice to Xero<div class="meta">Task · Done</div></td><td class="val green">(0/8)</td></tr><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61177">#61177</a></td><td class="pj"><span class="proj">Sofresh</span></td><td class="tt">[Unextracted Files] Các file move qua unextracted status đang Pending<div class="meta">Defect · Done</div></td><td class="val green">(0/0.5)</td></tr><tr><td class="g">▶️</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61176">#61176</a></td><td class="pj"><span class="proj">Sofresh</span></td><td class="tt">[Validate] Highlight chưa đúng khi validate mismatch<div class="meta">Defect · Ready for Verify</div></td><td class="val amber">(2/2)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Khang Nguyen Le Dinh</h2><div class="badges"><span class="bd b-green">3 completed</span><span class="bd b-blue">1 created</span><span class="bd b-amber">1 started</span></div></div>
+<table><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61701">#61701</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[HC] Không lấy được expense type vendor portal<div class="meta">Defect · Done</div></td><td class="val green">(0/2)</td></tr><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61702">#61702</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[HC] Không download được invoice customer &quot;PH02000013500&quot;<div class="meta">Defect · Done</div></td><td class="val green">(0/2)</td></tr><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61746">#61746</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[HC] Nếu Expense Type &quot;OTHER-PRMKT&quot; PIC &quot;thao.thiphan@vtijs.com&quot; &amp; &quot;chau.dangtb@vtijs.onmicrosoft.com&quot;<div class="meta">Defect · Done</div></td><td class="val green">(0/1)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62034">#62034</a></td><td class="pj"><span class="proj">Maxim</span></td><td class="tt">Setup test and prod env for full workflow<div class="meta">Task · In Progress</div></td><td class="val blue">(6/6)</td></tr></table>
+<div class="warn">No movement ≥ 3 days on <a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59698">#59698</a></div>
+</div>
+<div class="card">
+<div class="chead"><h2>Ngan Pham Thi Bich</h2><div class="badges"><span class="bd b-green">2 completed</span><span class="bd b-blue">2 created</span><span class="bd b-amber">3 started</span></div></div>
+<table><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55643">#55643</a></td><td class="pj"><span class="proj">HC</span></td><td class="tt">Booking for INTERNET<div class="meta">Product Backlog Item · Done</div></td><td class="val grey">(—)</td></tr><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61771">#61771</a></td><td class="pj"><span class="proj">HC</span></td><td class="tt">[INTERNET] Test/Verify booking internet<div class="meta">Product Backlog Item · Done</div></td><td class="val grey">(—)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61992">#61992</a></td><td class="pj"><span class="proj">Sofresh</span></td><td class="tt">[QC] Check download invoice from google drive<div class="meta">Task · In Progress</div></td><td class="val blue">(8/8)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62007">#62007</a></td><td class="pj"><span class="proj">Sofresh</span></td><td class="tt">[Download invoice] Mapping sai PO<div class="meta">Defect · Ready for Verify</div></td><td class="val grey">(—)</td></tr><tr><td class="g">▶️</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60790">#60790</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[HC] Auto download file Vendor_D365 từ web<div class="meta">Defect · Ready for Verify</div></td><td class="val amber">(1/3)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Khanh Dinh Quoc</h2><div class="badges"><span class="bd b-green">2 completed</span><span class="bd b-blue">2 created</span></div></div>
+<table><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62043">#62043</a></td><td class="pj"><span class="proj">Cholimex</span></td><td class="tt">[Cholimex] [Dev] Remove pending work item fetch limit in SyncMailWorkflow<div class="meta">Task · Done</div></td><td class="val green">(0/2)</td></tr><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62037">#62037</a></td><td class="pj"><span class="proj">Starbucks</span></td><td class="tt">[Starbucks] [Dev] Refine Duplicate Invoice Validation and Warning Logging in D365Portal<div class="meta">Task · Done</div></td><td class="val green">(0/1)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Sang Luong Tan</h2><div class="badges"><span class="bd b-green">1 completed</span><span class="bd b-blue">7 created</span><span class="bd b-amber">1 started</span></div></div>
+<table><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61483">#61483</a></td><td class="pj"><span class="proj">Sofresh</span></td><td class="tt">Implement matching po<div class="meta">Task · Done</div></td><td class="val green">(0/8)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62008">#62008</a></td><td class="pj"><span class="proj">Sofresh</span></td><td class="tt">[Download invoice] Thay đổi thao tác UI về googgle drive desktop sync về ổ đĩa<div class="meta">Defect · New</div></td><td class="val blue">(8/8)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62011">#62011</a></td><td class="pj"><span class="proj">Sofresh</span></td><td class="tt">[Download invoice] Format lại file ap tracker<div class="meta">Defect · New</div></td><td class="val blue">(4/4)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62012">#62012</a></td><td class="pj"><span class="proj">Sofresh</span></td><td class="tt">[Download invoice] Wf treo<div class="meta">Defect · New</div></td><td class="val blue">(2/2)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62014">#62014</a></td><td class="pj"><span class="proj">Sofresh</span></td><td class="tt">[Download invoice] Add logic tính vat_rate<div class="meta">Defect · New</div></td><td class="val blue">(4/4)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62028">#62028</a></td><td class="pj"><span class="proj">Sofresh</span></td><td class="tt">[UI] Cột status tab pending để là Matched or Mismatched<div class="meta">Defect · New</div></td><td class="val blue">(2/2)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62029">#62029</a></td><td class="pj"><span class="proj">Sofresh</span></td><td class="tt">[UI] Bên trong detail để Matched or Mismatched<div class="meta">Defect · New</div></td><td class="val blue">(2/2)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62041">#62041</a></td><td class="pj"><span class="proj">Sofresh</span></td><td class="tt">Update tracker template, fill all data items<div class="meta">Task · In Progress</div></td><td class="val blue">(8/12)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Khanh Le Gia</h2><div class="badges"><span class="bd b-green">1 completed</span><span class="bd b-blue">2 created</span><span class="bd b-amber">1 started</span></div></div>
+<table><tr><td class="g">✅</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61831">#61831</a></td><td class="pj"><span class="proj">Vistra</span></td><td class="tt">[WF1] Check Issue Logs from Customers 04/11/2026<div class="meta">Task · Done</div></td><td class="val green">(0/8)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62006">#62006</a></td><td class="pj"><span class="proj">Maxim</span></td><td class="tt">Research Maxim-SSC Project<div class="meta">Product Backlog Item · New</div></td><td class="val grey">(—)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62009">#62009</a></td><td class="pj"><span class="proj">Maxim</span></td><td class="tt">[Maxim] Research Maxim_SSC PRD<div class="meta">Task · In Progress</div></td><td class="val blue">(16/16)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Tien Pham Van</h2><div class="badges"><span class="bd b-green">0 completed</span><span class="bd b-blue">5 created</span><span class="bd b-amber">1 started</span></div></div>
+<table><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62026">#62026</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">[UI] Khoảng cách các cột item<div class="meta">Defect · New</div></td><td class="val blue">(2/2)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62027">#62027</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">[UI] Bỏ cột work item đi không cần cho người dùng<div class="meta">Defect · New</div></td><td class="val blue">(2/2)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62031">#62031</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">[FE] Open Review dialog on row click (PO/Non-PO)<div class="meta">Task · In Progress</div></td><td class="val blue">(2/2)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62032">#62032</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">[FE] Hide Work Item link in Review dialog for WorkFlowUser<div class="meta">Task · To Do</div></td><td class="val blue">(1/1)</td></tr><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62033">#62033</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">[FE] Restrict AP View Configuration access for WorkFlowUser<div class="meta">Task · To Do</div></td><td class="val blue">(2/2)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Hung Hoang</h2><div class="badges"><span class="bd b-green">0 completed</span><span class="bd b-blue">1 created</span><span class="bd b-amber">1 started</span></div></div>
+<table><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62003">#62003</a></td><td class="pj"><span class="proj">Bestway</span></td><td class="tt">Find a way to run workflows in parallel without causing WhatsApp conflicts<div class="meta">Task · In Progress</div></td><td class="val blue">(5/5)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Hung Tran My</h2><div class="badges"><span class="bd b-green">0 completed</span><span class="bd b-blue">1 created</span><span class="bd b-amber">1 started</span></div></div>
+<table><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61987">#61987</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[KBE] [QC] Check update logic cases feature to allow PICs to edit the WhatsApp Location column and change the status to…<div class="meta">Task · In Progress</div></td><td class="val blue">(8/8)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Vinh Ly The</h2><div class="badges"><span class="bd b-green">0 completed</span><span class="bd b-blue">1 created</span><span class="bd b-amber">1 started</span></div></div>
+<table><tr><td class="g">➕</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62015">#62015</a></td><td class="pj"><span class="proj">Hyper</span></td><td class="tt">[KBE] Migrate row in tracker<div class="meta">Task · In Progress</div></td><td class="val blue">(8/8)</td></tr></table>
+
+</div>
+<div class="card">
+<div class="chead"><h2>Anh Truong Thi Hong</h2><div class="badges"><span class="bd b-green">0 completed</span><span class="bd b-blue">0 created</span><span class="bd b-amber">2 started</span></div></div>
+<table><tr><td class="g">▶️</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61772">#61772</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Research and explore new system features<div class="meta">Task · In Progress</div></td><td class="val amber">(12/20)</td></tr><tr><td class="g">▶️</td><td class="id"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61773">#61773</a></td><td class="pj"><span class="proj">AI Agent Srv</span></td><td class="tt">Read Audit project requirements of Vistra VN, and Vistra TL<div class="meta">Task · In Progress</div></td><td class="val amber">(8/12)</td></tr></table>
+
+</div>
+<p class="idle"><b>No board activity today:</b> Ngoc Nguyen Thi Bich (1 open)</p>
+<footer>Generated by Board Hygiene &nbsp;·&nbsp; Azure DevOps Server AFusion
+&nbsp;·&nbsp; 2026-11-05 19:56 &nbsp;·&nbsp;
+completed = ClosedDate in window (ChangedDate is bumped by the RW-zeroing job) &nbsp;·&nbsp;
+blocker = blocked flag/tag or blocker wording in today's history comment &nbsp;·&nbsp;
+hours shown as (remaining/estimate)</footer>
+</div></body></html>
