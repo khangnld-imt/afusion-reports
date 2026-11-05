@@ -1,0 +1,155 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>PBI Effort backfill — Sprint 6 &amp; 7 · AFusion</title>
+<style>
+:root{--bg:#0b1017;--panel:#121a24;--panel2:#0f1620;--line:#1f2b3a;--txt:#e6edf5;--mut:#8497ab;--dim:#5b6b7d;
+--red:#f87171;--amber:#fbbf24;--green:#34d399;--blue:#60a5fa;--violet:#a78bfa}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.6 "Segoe UI",-apple-system,Roboto,Arial,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px 70px}
+header{padding:38px 0 26px;border-bottom:1px solid var(--line);margin-bottom:26px;
+background:radial-gradient(900px 220px at 12% -30%,rgba(52,211,153,.14),transparent)}
+.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--green);font-weight:700}
+h1{margin:10px 0 8px;font-size:29px;letter-spacing:-.02em;line-height:1.25}
+h1 .accent{color:var(--green)}
+.meta{color:var(--mut);font-size:12.5px}
+.mono{font-family:ui-monospace,Consolas,"Courier New",monospace;font-size:11.5px}
+h2{font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut);margin:38px 0 14px;
+padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+h2 .n{color:var(--dim);font-weight:700}
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:11px;margin:22px 0 6px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:14px 15px 13px;position:relative;overflow:hidden}
+.kpi:before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:var(--line)}
+.kpi.good:before{background:var(--green)} .kpi.warn:before{background:var(--amber)} .kpi.info:before{background:var(--blue)}
+.kpi .lab{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:700}
+.kpi .val{font-size:27px;font-weight:700;letter-spacing:-1px;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.kpi.good .val{color:var(--green)} .kpi.warn .val{color:var(--amber)} .kpi.info .val{color:var(--blue)}
+.kpi .note{font-size:11px;color:var(--mut);line-height:1.4}
+.verdict{background:linear-gradient(135deg,rgba(52,211,153,.10),rgba(18,26,36,.6));border:1px solid #1d4038;
+border-left:3px solid var(--green);border-radius:11px;padding:17px 20px;margin:20px 0 4px}
+.verdict .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:700}
+.verdict p{margin:7px 0 0;font-size:14.5px;color:#d3e2f0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:18px 20px;margin:14px 0}
+.card.amber{border-left:3px solid var(--amber)} .card.blue{border-left:3px solid var(--blue)}
+.card h3{margin:0 0 8px;font-size:15px}
+.card p{margin:6px 0;color:#c8d6e4;font-size:13.5px}
+.card ul{margin:8px 0 0;padding-left:20px;color:#c8d6e4;font-size:13.5px}
+.card li{margin:4px 0}
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--panel2);
+border:1px solid var(--line);border-radius:11px;overflow:hidden}
+th{text-align:left;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+padding:10px 11px;border-bottom:1px solid var(--line);background:#0d141d;font-weight:700}
+td{padding:9px 11px;border-bottom:1px solid #17222f;vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:rgba(96,165,250,.045)}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.dim{color:var(--dim)}
+a{color:var(--blue);text-decoration:none} a:hover{text-decoration:underline}
+.pill{display:inline-block;padding:1px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.sg{background:rgba(52,211,153,.16);color:#6ee7b7} .sp{background:rgba(96,165,250,.16);color:#93c5fd}
+.sa{background:rgba(167,139,250,.16);color:#c4b5fd} .sd{background:rgba(132,151,171,.16);color:#a9b8c8}
+.sv{background:rgba(251,191,36,.16);color:#fcd34d}
+.was{color:var(--dim);text-decoration:line-through}
+.ok{color:var(--green)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(3,1fr)}.split{grid-template-columns:1fr}}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);color:var(--dim);font-size:11.5px}
+@media print{body{background:#fff;color:#111}.kpi,table,.card,.verdict{background:#fff;border-color:#ccc}}
+</style></head><body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">AFusion · board hygiene · effort backfill</div>
+  <h1>Blank PBI Effort in Sprint 6 &amp; 7 — <span class="accent">2 items filled, 65 hours restored</span></h1>
+  <div class="meta">Iterations: <span class="mono">AFusion\Projects Development\Sprint 6</span> (2026-10-12 → 10-23) and
+  <span class="mono">…\Sprint 7</span> (2026-10-26 → 11-06) · read-back verified · generated 2026-11-06 00:43 (UTC+7)</div>
+</header>
+
+<div class="kpis">
+  <div class="kpi info"><div class="lab">PBIs scanned</div><div class="val">78</div><div class="note">53 in Sprint 6 · 25 in Sprint 7</div></div>
+  <div class="kpi warn"><div class="lab">Blank Effort found</div><div class="val">2</div><div class="note">All of them in Sprint 6 · Sprint 7 clean</div></div>
+  <div class="kpi good"><div class="lab">Filled</div><div class="val">2</div><div class="note">0 failures · 0 state changes</div></div>
+  <div class="kpi good"><div class="lab">Hours written</div><div class="val">65</div><div class="note">8 h + 57 h from child rollup</div></div>
+  <div class="kpi info"><div class="lab">Child tasks rolled up</div><div class="val"><tr><td class="num">#53826</td><td>Task</td><td><span class="pill sg">Done</span></td><td>Additional logic to mitigate Dcorp authorization API call</td><td class="num">4</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #53825</td></tr><tr><td class="num">#59270</td><td>Task</td><td><span class="pill sg">Done</span></td><td>PO list: add Received (Đã nhận hàng, docStatus 3) status to the PO status list</td><td class="num">4</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #53825</td></tr><tr><td class="num">#60440</td><td>Task</td><td><span class="pill sg">Done</span></td><td>01 — log-upload runs end-to-end, and the host test walks every mode</td><td class="num">3</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60441</td><td>Task</td><td><span class="pill sg">Done</span></td><td>02 — One composition entry point closes step + workflow + handler</td><td class="num">4</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60442</td><td>Task</td><td><span class="pill sg">Done</span></td><td>03 — Retire or wire the two unreachable workflows</td><td class="num">3</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60443</td><td>Task</td><td><span class="pill sg">Done</span></td><td>04 — Alert delivery as one module</td><td class="num">5</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60444</td><td>Task</td><td><span class="pill sg">Done</span></td><td>05 — Retry settlement as one module</td><td class="num">3</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60445</td><td>Task</td><td><span class="pill sg">Done</span></td><td>06 — All waits through the retry-delay port, retry policy in one home</td><td class="num">3</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60446</td><td>Task</td><td><span class="pill sg">Done</span></td><td>07 — One Orchestrator job-invocation adapter</td><td class="num">4</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60447</td><td>Task</td><td><span class="pill sg">Done</span></td><td>08 — One queue-resolution module; the dispatch adapter goes through the SDK</td><td class="num">3</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60448</td><td>Task</td><td><span class="pill sg">Done</span></td><td>09 — One vendor-matching door</td><td class="num">3</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60449</td><td>Task</td><td><span class="pill sg">Done</span></td><td>10 — Run-mode table in the host</td><td class="num">5</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60450</td><td>Task</td><td><span class="pill sg">Done</span></td><td>11 — Durable-file module with atomic writes</td><td class="num">3</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60451</td><td>Task</td><td><span class="pill sg">Done</span></td><td>12 — Typed settings projection available at the composition seam (expand)</td><td class="num">4</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60452</td><td>Task</td><td><span class="pill sg">Done</span></td><td>13 — Migrate compositions, batch A: business workflows</td><td class="num">4</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60453</td><td>Task</td><td><span class="pill sg">Done</span></td><td>14 — Migrate compositions, batch B: host, dispatcher, infrastructure</td><td class="num">4</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60454</td><td>Task</td><td><span class="pill sg">Done</span></td><td>15 — Shrink the config grep gate; amend the settings decision record (contract)</td><td class="num">2</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60455</td><td>Task</td><td><span class="pill sg">Done</span></td><td>16 — The transition table becomes the machine</td><td class="num">2</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60456</td><td>Task</td><td><span class="pill sg">Done</span></td><td>17 — Delete the dead flag and the write-only context keys</td><td class="num">1</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60457</td><td>Task</td><td><span class="pill sg">Done</span></td><td>18 — Delete the dead tree and the dead helpers</td><td class="num">1</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr></div><div class="note">All Done · 0 h remaining</div></div>
+  <div class="kpi good"><div class="lab">Blanks left</div><div class="val">0</div><div class="note">Both sprints re-scanned after write</div></div>
+</div>
+
+<div class="verdict">
+  <div class="tag">Result</div>
+  <p>Two of the 78 PBIs in Sprint 6 and Sprint 7 carried no Effort at all — <b>#53825 Dcorp operation</b> and
+  <b>#60421 Architecture deepening — Workflow-Maxim</b>. Both are now estimated from the work actually delivered
+  underneath them: <b>8 h</b> and <b>57 h</b>, the sum of <span class="mono">CompletedWork</span> across their
+  20 child tasks (2 and 18 respectively, all Done, 0 h remaining). Sprint 7 had no blank Effort to begin with.</p>
+</div>
+
+<h2><span class="n">01</span> What changed</h2>
+<table>
+<thead><tr><th>ID</th><th>PBI</th><th>Sprint</th><th>State</th><th class="num">Children</th>
+<th class="num">Σ CompletedWork</th><th class="num">Effort</th><th>Closed</th></tr></thead>
+<tbody><tr><td class="num">#53825</td><td><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53825" target="_blank">Dcorp operation</a></td><td>Sprint 6</td><td><span class="pill sg">Done</span></td><td class="num">2</td><td class="num">8 h</td><td class="num"><span class="was">blank</span> → <b class="ok">8 h</b></td><td class="dim">2026-10-21</td></tr><tr><td class="num">#60421</td><td><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60421" target="_blank">Architecture deepening — Workflow-Maxim</a></td><td>Sprint 6</td><td><span class="pill sg">Done</span></td><td class="num">18</td><td class="num">57 h</td><td class="num"><span class="was">blank</span> → <b class="ok">57 h</b></td><td class="dim">2026-10-23</td></tr></tbody></table>
+
+<h2><span class="n">02</span> Child task rollup — the source of every number</h2>
+<table>
+<thead><tr><th>Task</th><th>Type</th><th>State</th><th>Title</th><th class="num">Completed</th>
+<th class="num">Orig. est.</th><th class="num">Remaining</th><th class="num">Parent PBI</th></tr></thead>
+<tbody><tr><td class="num">#53826</td><td>Task</td><td><span class="pill sg">Done</span></td><td>Additional logic to mitigate Dcorp authorization API call</td><td class="num">4</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #53825</td></tr><tr><td class="num">#59270</td><td>Task</td><td><span class="pill sg">Done</span></td><td>PO list: add Received (Đã nhận hàng, docStatus 3) status to the PO status list</td><td class="num">4</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #53825</td></tr><tr><td class="num">#60440</td><td>Task</td><td><span class="pill sg">Done</span></td><td>01 — log-upload runs end-to-end, and the host test walks every mode</td><td class="num">3</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60441</td><td>Task</td><td><span class="pill sg">Done</span></td><td>02 — One composition entry point closes step + workflow + handler</td><td class="num">4</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60442</td><td>Task</td><td><span class="pill sg">Done</span></td><td>03 — Retire or wire the two unreachable workflows</td><td class="num">3</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60443</td><td>Task</td><td><span class="pill sg">Done</span></td><td>04 — Alert delivery as one module</td><td class="num">5</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60444</td><td>Task</td><td><span class="pill sg">Done</span></td><td>05 — Retry settlement as one module</td><td class="num">3</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60445</td><td>Task</td><td><span class="pill sg">Done</span></td><td>06 — All waits through the retry-delay port, retry policy in one home</td><td class="num">3</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60446</td><td>Task</td><td><span class="pill sg">Done</span></td><td>07 — One Orchestrator job-invocation adapter</td><td class="num">4</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60447</td><td>Task</td><td><span class="pill sg">Done</span></td><td>08 — One queue-resolution module; the dispatch adapter goes through the SDK</td><td class="num">3</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60448</td><td>Task</td><td><span class="pill sg">Done</span></td><td>09 — One vendor-matching door</td><td class="num">3</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60449</td><td>Task</td><td><span class="pill sg">Done</span></td><td>10 — Run-mode table in the host</td><td class="num">5</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60450</td><td>Task</td><td><span class="pill sg">Done</span></td><td>11 — Durable-file module with atomic writes</td><td class="num">3</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60451</td><td>Task</td><td><span class="pill sg">Done</span></td><td>12 — Typed settings projection available at the composition seam (expand)</td><td class="num">4</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60452</td><td>Task</td><td><span class="pill sg">Done</span></td><td>13 — Migrate compositions, batch A: business workflows</td><td class="num">4</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60453</td><td>Task</td><td><span class="pill sg">Done</span></td><td>14 — Migrate compositions, batch B: host, dispatcher, infrastructure</td><td class="num">4</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60454</td><td>Task</td><td><span class="pill sg">Done</span></td><td>15 — Shrink the config grep gate; amend the settings decision record (contract)</td><td class="num">2</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60455</td><td>Task</td><td><span class="pill sg">Done</span></td><td>16 — The transition table becomes the machine</td><td class="num">2</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60456</td><td>Task</td><td><span class="pill sg">Done</span></td><td>17 — Delete the dead flag and the write-only context keys</td><td class="num">1</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr><tr><td class="num">#60457</td><td>Task</td><td><span class="pill sg">Done</span></td><td>18 — Delete the dead tree and the dead helpers</td><td class="num">1</td><td class="num">—</td><td class="num">—</td><td class="num dim">parent #60421</td></tr></tbody></table>
+
+<h2><span class="n">03</span> Coverage after the write</h2>
+<table>
+<thead><tr><th>Sprint</th><th class="num">Items</th><th class="num">PBIs</th><th class="num">Blank before</th>
+<th class="num">Blank after</th><th class="num">Σ PBI Effort</th><th class="num">Σ Task/Defect completed</th></tr></thead>
+<tbody><tr><td><b>Sprint 6</b><div class="dim mono">AFusion\Projects Development\Sprint 6</div></td><td class="num">294</td><td class="num">53</td><td class="num">2</td><td class="num">0</td><td class="num">1275 h</td><td class="num">982.75 h</td></tr><tr><td><b>Sprint 7</b><div class="dim mono">AFusion\Projects Development\Sprint 7</div></td><td class="num">312</td><td class="num">25</td><td class="num">0</td><td class="num">0</td><td class="num">683 h</td><td class="num">746.7 h</td></tr></tbody></table>
+
+<h2><span class="n">04</span> How it was written, and why it needed a rule bypass</h2>
+<div class="split">
+  <div class="card amber">
+    <h3>The blocker: Effort is read-only once a PBI is Done</h3>
+    <p>A plain PATCH was rejected with
+    <span class="mono">TF401320: Rule Error for field Effort. Error code: ReadOnly, InvalidNotOldValue.</span>
+    Both targets are already <b>Done</b>, and this process locks Effort on the transition to Done — so the
+    field could not simply be filled in.</p>
+    <p>I did <b>not</b> reopen them. Reopening would reset <span class="mono">ClosedDate</span> and put two
+    bogus state changes into the history of items closed on 2026-10-21 and 2026-10-23. Instead the write used
+    <span class="mono">bypassRules=true</span>, which honours the value without touching state, ClosedDate,
+    iteration, assignee or any other field.</p>
+  </div>
+  <div class="card blue">
+    <h3>Audit trail</h3>
+    <ul>
+      <li>Each item got a <span class="mono">[Board Hygiene]</span> history note in the same revision as the
+      Effort value — what changed, the rollup it came from, and the bypass.</li>
+      <li>Read-back confirms: #53825 Effort <b>8</b> (rev 17), #60421 Effort <b>57</b> (rev 12), both still
+      <b>Done</b>, ClosedDate unchanged, iteration unchanged.</li>
+      <li>Reversal is one PATCH per item with the original value <span class="mono">blank</span> — the note
+      records it, so nothing depends on this report surviving.</li>
+    </ul>
+  </div>
+</div>
+
+<h2><span class="n">05</span> Secondary findings worth a human glance</h2>
+<div class="card">
+  <ul>
+    <li><b>20 child tasks have CompletedWork but no OriginalEstimate.</b> That is why the rollup had to use
+    delivered hours: the estimate side of those tasks is empty, so 8 h and 57 h are actuals, not planned size.
+    If you want Effort to mean "planned size", the tasks need OriginalEstimate first — otherwise this backfill
+    slightly under-states the PBI where a task ran longer than planned.</li>
+    <li><b>#53825's second child looks mis-parented.</b> Task <b>#59270</b> — "PO list: add Received
+    (Đã nhận hàng, docStatus 3) status" — hangs under "Dcorp operation" alongside the Dcorp authorization task.
+    It may be legitimate (same vendor feed), but if it is not, then 4 h of that PBI's new Effort belongs to a
+    different PBI. Worth one look; I have not moved it.</li>
+    <li><b>Sprint 7 is clean but not consistent.</b> All 25 PBIs carry Effort, yet Σ PBI Effort (683 h) sits below
+    Σ completed Task/Defect hours (747 h) — the same "estimate below actuals" pattern, spread thin. Not a
+    backfill job, a planning note for the retro.</li>
+  </ul>
+</div>
+
+<footer>
+Source: Azure DevOps Server <span class="mono">devops.imt-soft.com/Inheritance</span> · project AFusion ·
+live read-back 2026-11-06 00:43 (UTC+7). Fields read: System.WorkItemType, State, IterationPath, Effort,
+CompletedWork, RemainingWork, OriginalEstimate, ClosedDate, ChangedDate, CommentCount.
+Scope: PBIs only (<span class="mono">Product Backlog Item</span>) under the two exact iteration paths above —
+the three same-named Sprint 6/7 nodes in Phase 1 and Phase 2 were excluded by full-path match.
+Effort values are sums of direct children (<span class="mono">Hierarchy-Forward</span>), deduplicated.
+No credentials are present in this document.
+</footer>
+</div></body></html>
