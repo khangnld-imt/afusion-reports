@@ -22,5 +22,11 @@
   "updated": "2026-11-05T09:17:48+07:00",
   "url": "https://khangnld-imt.github.io/afusion-reports/pmo-remediation/",
   "summary": "10 resolved \u00b7 32 need a human (32 gap, 0 at risk) \u00b7 65% controls met"
+ },
+ "c17-validation": {
+  "title": "PMO control #17 \u2014 parent status vs subtask progress (Sprint 6 & 7)",
+  "updated": "2026-11-05T11:44:00+07:00",
+  "url": "https://khangnld-imt.github.io/afusion-reports/c17-validation/",
+  "summary": "4 items out of sync: 3 parents open with every child Done (#55483, #55643, #59872) \u00b7 1 parent Done with an open child (#53935)"
  }
 }
