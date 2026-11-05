@@ -1,0 +1,187 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Commit &amp; PR evidence on Done PBIs — AFusion</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f6f9;color:#16202c;font:15px/1.55 "Segoe UI",-apple-system,Roboto,Arial,sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+a{color:#0b6bcb;text-decoration:none} a:hover{text-decoration:underline}
+header.hero{background:linear-gradient(135deg,#0d1826 0%,#1b3555 55%,#12555e 100%);color:#fff;
+  padding:34px 0 30px;margin-bottom:26px}
+.eyebrow{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#8fd6df;font-weight:700}
+h1{margin:10px 0 8px;font-size:31px;line-height:1.15;letter-spacing:-.01em}
+.lede{margin:0;color:#c9d8e8;max-width:780px;font-size:15.5px}
+.meta{margin-top:16px;font-size:12px;color:#93a9c2;letter-spacing:.02em}
+.meta b{color:#e6eef7;font-weight:600}
+.verdict{display:flex;gap:18px;align-items:flex-start;background:#fff;border:1px solid #e3e8ef;
+  border-left:5px solid #0f9d58;border-radius:12px;padding:18px 20px;margin-bottom:18px;
+  box-shadow:0 1px 2px rgba(16,28,43,.05)}
+.verdict .vlabel{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:#8a95a3;font-weight:700;margin-bottom:3px}
+.verdict b{font-size:22px;letter-spacing:-.01em}
+.verdict p{margin:0;color:#4a5666;font-size:14px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 12px}
+.kpi{background:#fff;border:1px solid #e3e8ef;border-radius:12px;padding:14px 16px}
+.kpi b{display:block;font-size:27px;line-height:1.05;letter-spacing:-.02em}
+.kpi span{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#5b6776;
+  font-weight:700;margin-top:5px}
+.kpi i{display:block;font-style:normal;font-size:11.5px;color:#8a95a3;margin-top:6px}
+.kpi.green b{color:#0f9d58} .kpi.amber b{color:#8a5a00} .kpi.slate b{color:#5b6776}
+.kpi.blue b{color:#1a5fb4}
+section.sprint{background:#fff;border:1px solid #e3e8ef;border-radius:12px;padding:18px 20px 6px;
+  margin-bottom:18px;box-shadow:0 1px 2px rgba(16,28,43,.04)}
+.shead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  border-bottom:2px solid #16202c;padding-bottom:9px;margin-bottom:6px}
+h2{margin:0;font-size:17px;letter-spacing:-.01em}
+h2 .dates{font-weight:400;color:#7a8797;font-size:12.5px;margin-left:8px;letter-spacing:0}
+.badge{font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;white-space:nowrap}
+.badge.pass{background:#e8f6ee;color:#0f7d46;border:1px solid #bfe6cf}
+.badge.warn{background:#fff5e5;color:#8a5a00;border:1px solid #f0d8ab}
+.scope{margin:10px 0 14px;color:#7a8797;font-size:12.5px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:14px}
+.tscroll table{min-width:720px}
+th{text-align:left;background:#f0f3f7;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  color:#5b6776;padding:8px 10px;border-bottom:1px solid #e3e8ef}
+td{padding:11px 10px;border-top:1px solid #eef1f5;vertical-align:top}
+tr:hover td{background:#fbfcfe}
+td.item{min-width:320px} td.item>a{font-weight:700;font-size:13.5px}
+td .t{color:#3d4a5a;margin-top:2px}
+td.sub,.sub{color:#7a8797;font-size:11.5px}
+.num{white-space:nowrap;font-variant-numeric:tabular-nums}
+b.c{color:#1a5fb4} b.p{color:#5b3fa8}
+.bar{display:inline-block;width:96px;height:7px;background:#e9edf2;border-radius:99px;
+  overflow:hidden;vertical-align:middle;margin-right:9px}
+.bar i{display:block;height:100%;border-radius:99px}
+.frac{font-weight:700;font-size:13px;font-variant-numeric:tabular-nums}
+.frac .of{color:#8a95a3;font-weight:400}
+.pill{display:inline-block;padding:1.5px 8px;border-radius:999px;font-size:10.5px;font-weight:700;
+  letter-spacing:.04em;white-space:nowrap}
+.pill.green{background:#e8f6ee;color:#0f7d46;border:1px solid #bfe6cf}
+.pill.amber{background:#fff5e5;color:#8a5a00;border:1px solid #f0d8ab}
+.tag{display:inline-block;background:#eef1f5;color:#5b6776;border:1px solid #dde3ea;
+  border-radius:999px;padding:1.5px 8px;font-size:10.5px;font-weight:700;white-space:nowrap}
+h2.sec{font-size:15px;letter-spacing:.02em;text-transform:uppercase;border-bottom:2px solid #16202c;
+  padding-bottom:7px;margin:30px 0 12px}
+.card{background:#fff;border:1px solid #e3e8ef;border-radius:12px;padding:16px 20px;margin-bottom:18px}
+.card p{margin:0 0 10px;color:#4a5666;font-size:13.5px}
+.card p:last-child{margin-bottom:0}
+.card ul{margin:6px 0 0;padding-left:18px;color:#4a5666;font-size:13px}
+.card li{margin:6px 0}
+.note{background:#fff8e8;border:1px solid #f0d8ab;border-left:4px solid #d99a00;
+  border-radius:0 10px 10px 0;padding:12px 16px;font-size:13px;color:#6b4a00;margin:14px 0}
+.ok{background:#eefaf3;border:1px solid #bfe6cf;border-left:4px solid #0f9d58;
+  border-radius:0 10px 10px 0;padding:12px 16px;font-size:13px;color:#0d5c36;margin:14px 0}
+code{background:#f0f3f7;border:1px solid #e3e8ef;border-radius:5px;padding:1px 5px;
+  font:12px/1.4 Consolas,monospace}
+.tw{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0 4px}
+.tcard{border:1px solid #e3e8ef;border-radius:10px;padding:12px 14px;background:#fbfcfe}
+.tcard .lbl{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#5b6776;font-weight:700}
+.tcard .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:9px;
+  font-size:13px;color:#3d4a5a}
+footer{margin:34px 0 46px;color:#8a95a3;font-size:11.5px;text-align:center}
+@media (max-width:860px){
+  .kpis{grid-template-columns:repeat(2,1fr)} .tw{grid-template-columns:1fr}
+  table{font-size:12px} .tscroll table{min-width:640px}
+  td.item{min-width:230px} h1{font-size:25px}
+}
+</style></head><body><div style="background:#101c2b;color:#dbe6f2;font:12.5px/1.6 'Segoe UI',-apple-system,Roboto,Arial,sans-serif;padding:9px 20px;text-align:center">Archived run <b>2026-11-05 · 16:01</b> — frozen snapshot · <a href="../" style="color:#8fbaff;text-decoration:none">latest c23-artifacts report →</a> · <a href="../../" style="color:#8fbaff;text-decoration:none">all reports</a></div>
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">AFusion · Board Hygiene · PMO controls 23 &amp; 24</div>
+  <h1>Commit &amp; PR evidence on Done PBIs</h1>
+  <p class="lede">Every Done Product Backlog Item in the current cycle was checked for a linked commit and
+  pull request. Where the PBI had none of its own, the evidence was inherited from its child items and
+  written back as artifact links. Nothing else on the item changed.</p>
+  <div class="meta"><b>Scope</b> Sprint 6 + Sprint 7 · <b>Generated</b> 05 Nov 2026, 16:00 (UTC+7) ·
+  <b>Source</b> devops.imt-soft.com/Inheritance/AFusion</div>
+</div></header>
+<div class="wrap">
+
+<div class="verdict">
+  <div><span class="vlabel">Result</span>
+    <b>30 of 49 Done PBIs now carry commit + PR evidence</b>
+    <p>648 artifact links inherited from child items (556 commits, 92 PRs). The other
+    19 had no evidence anywhere in their subtree and were left untouched.</p></div>
+</div>
+
+<div class="kpis">
+  <div class="kpi blue"><b>49</b><span>Done PBIs scanned</span><i>Sprint 6 + Sprint 7</i></div>
+  <div class="kpi green"><b>30</b><span>PBIs linked</span><i>had nothing of their own</i></div>
+  <div class="kpi green"><b>648</b><span>Artifact links added</span><i>556 commits · 92 PRs</i></div>
+  <div class="kpi slate"><b>19</b><span>Left as is</span><i>no evidence below</i></div>
+</div>
+
+<section class="sprint">
+  <div class="shead"><h2>Before → after<span class="dates">Done PBIs in Sprint 6 &amp; 7</span></h2>
+    <span class="badge pass">0 write failures</span></div>
+  <p class="scope">Counts are work items, not links. "Both" is what controls 23 and 24 need to pass.</p>
+  <div class="tw">
+    <div class="tcard"><div class="lbl">Before</div>
+      <div class="row"><span>Commit + PR</span><span class="bar"><i style="width:0%;background:#b3261e"></i></span><span class="frac">0<span class="of">/49</span></span></div>
+      <div class="row"><span>Commit only</span><span class="bar"><i style="width:0%;background:#d99a00"></i></span><span class="frac">0<span class="of">/49</span></span></div>
+      <div class="row"><span>PR only</span><span class="bar"><i style="width:0%;background:#d99a00"></i></span><span class="frac">0<span class="of">/49</span></span></div>
+      <div class="row"><span>Neither</span><span class="bar"><i style="width:100%;background:#b3261e"></i></span><span class="frac">49<span class="of">/49</span></span></div>
+    </div>
+    <div class="tcard"><div class="lbl">After</div>
+      <div class="row"><span>Commit + PR</span><span class="bar"><i style="width:57%;background:#0f9d58"></i></span><span class="frac">28<span class="of">/49</span></span></div>
+      <div class="row"><span>Commit only</span><span class="bar"><i style="width:2%;background:#d99a00"></i></span><span class="frac">1<span class="of">/49</span></span></div>
+      <div class="row"><span>PR only</span><span class="bar"><i style="width:2%;background:#d99a00"></i></span><span class="frac">1<span class="of">/49</span></span></div>
+      <div class="row"><span>Neither</span><span class="bar"><i style="width:39%;background:#b3261e"></i></span><span class="frac">19<span class="of">/49</span></span></div>
+    </div>
+  </div>
+  <p class="scope" style="margin-top:14px">Verified by read-back after the write: 28 items now hold both
+  kinds, 556 commit links and 92 PR links exist on the 49 items in scope.</p>
+</section>
+
+<section class="sprint">
+  <div class="shead"><h2>Items that received links<span class="dates">30 PBIs</span></h2>
+    <span class="badge pass">verified</span></div>
+  <p class="scope">Sorted by volume. A single child can carry a whole feature branch — #60421 alone pulled
+  174 commits and 18 PRs from its 18 children.</p>
+  <div class="tscroll"><table><thead><tr><th>Product Backlog Item</th><th>Sprint</th><th>Children read</th><th>Commits added</th><th>PRs added</th><th>Evidence now</th></tr></thead><tbody><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60421">#60421</a><div class="t">Architecture deepening — Workflow-Maxim</div></td><td class="sub">Sprint 6</td><td class="num">18</td><td class="num"><b class="c">+174</b></td><td class="num"><b class="p">+18</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59458">#59458</a><div class="t">Classification Gates</div></td><td class="sub">Sprint 6</td><td class="num">1</td><td class="num"><b class="c">+68</b></td><td class="num"><b class="p">+1</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59462">#59462</a><div class="t">Extraction Normalization</div></td><td class="sub">Sprint 6</td><td class="num">5</td><td class="num"><b class="c">+58</b></td><td class="num"><b class="p">+6</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59465">#59465</a><div class="t">Observability &amp; Housekeeping</div></td><td class="sub">Sprint 6</td><td class="num">1</td><td class="num"><b class="c">+29</b></td><td class="num"><b class="p">+1</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59456">#59456</a><div class="t">Scheduling &amp; Lifecycle</div></td><td class="sub">Sprint 6</td><td class="num">2</td><td class="num"><b class="c">+27</b></td><td class="num"><b class="p">+2</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59463">#59463</a><div class="t">Disposition &amp; Routing</div></td><td class="sub">Sprint 6</td><td class="num">2</td><td class="num"><b class="c">+25</b></td><td class="num"><b class="p">+2</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59461">#59461</a><div class="t">Classification Inputs</div></td><td class="sub">Sprint 6</td><td class="num">1</td><td class="num"><b class="c">+25</b></td><td class="num"><b class="p">+1</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53825">#53825</a><div class="t">Dcorp operation</div></td><td class="sub">Sprint 6</td><td class="num">2</td><td class="num"><b class="c">+20</b></td><td class="num"><b class="p">+1</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58919">#58919</a><div class="t">Q4 Supports</div></td><td class="sub">Sprint 6</td><td class="num">22</td><td class="num"><b class="c">+10</b></td><td class="num"><b class="p">+9</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59455">#59455</a><div class="t">Foundation</div></td><td class="sub">Sprint 6</td><td class="num">1</td><td class="num"><b class="c">+18</b></td><td class="num"><b class="p">+1</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59459">#59459</a><div class="t">Session &amp; Environment</div></td><td class="sub">Sprint 6</td><td class="num">1</td><td class="num"><b class="c">+17</b></td><td class="num"><b class="p">+1</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59996">#59996</a><div class="t">Implement posting logic</div></td><td class="sub">Sprint 6</td><td class="num">3</td><td class="num"><b class="c">+8</b></td><td class="num"><b class="p">+8</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58916">#58916</a><div class="t">Q4 Supports</div></td><td class="sub">Sprint 6</td><td class="num">2</td><td class="num"><b class="c">+14</b></td><td class="num"><b class="p">+1</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55496">#55496</a><div class="t">OneDrive Archiving for Images &amp; Reports (Type 2)</div></td><td class="sub">Sprint 7</td><td class="num">18</td><td class="num"><b class="c">+6</b></td><td class="num"><b class="p">+6</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59666">#59666</a><div class="t">Implement Account code, Credit note, Goods return note</div></td><td class="sub">Sprint 6</td><td class="num">4</td><td class="num"><b class="c">+6</b></td><td class="num"><b class="p">+6</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58910">#58910</a><div class="t">Q4 Supports</div></td><td class="sub">Sprint 6</td><td class="num">5</td><td class="num"><b class="c">+6</b></td><td class="num"><b class="p">+5</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55491">#55491</a><div class="t">Download Images from Designated Group Chats</div></td><td class="sub">Sprint 7</td><td class="num">10</td><td class="num"><b class="c">+5</b></td><td class="num"><b class="p">+5</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59457">#59457</a><div class="t">Workitem Delivery</div></td><td class="sub">Sprint 6</td><td class="num">1</td><td class="num"><b class="c">+9</b></td><td class="num"><b class="p">+1</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59460">#59460</a><div class="t">Alerting &amp; Monitoring</div></td><td class="sub">Sprint 6</td><td class="num">1</td><td class="num"><b class="c">+9</b></td><td class="num"><b class="p">+1</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59464">#59464</a><div class="t">Embed-Link Maintenance</div></td><td class="sub">Sprint 6</td><td class="num">1</td><td class="num"><b class="c">+7</b></td><td class="num"><b class="p">+1</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58913">#58913</a><div class="t">Q4 Supports</div></td><td class="sub">Sprint 6</td><td class="num">17</td><td class="num"><b class="c">+3</b></td><td class="num"><b class="p">+3</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55692">#55692</a><div class="t">UAT Feedbacks</div></td><td class="sub">Sprint 6</td><td class="num">25</td><td class="num"><b class="c">+2</b></td><td class="num"><b class="p">+3</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58911">#58911</a><div class="t">Q4 Supports</div></td><td class="sub">Sprint 6</td><td class="num">13</td><td class="num"><b class="c">+2</b></td><td class="num"><b class="p">+2</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58921">#58921</a><div class="t">Q4 Supports</div></td><td class="sub">Sprint 6</td><td class="num">2</td><td class="num"><b class="c">+1</b></td><td class="num"><b class="p">+2</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58924">#58924</a><div class="t">UAT Feedbacks</div></td><td class="sub">Sprint 6</td><td class="num">19</td><td class="num"><b class="c">+3</b></td><td class="num"><b class="p">+0</b></td><td><span class="pill amber">commits only</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55483">#55483</a><div class="t">AI Content Reading &amp; File Naming per Convention</div></td><td class="sub">Sprint 6</td><td class="num">8</td><td class="num"><b class="c">+1</b></td><td class="num"><b class="p">+1</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55642">#55642</a><div class="t">Booking for MKT</div></td><td class="sub">Sprint 6</td><td class="num">4</td><td class="num"><b class="c">+1</b></td><td class="num"><b class="p">+1</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58912">#58912</a><div class="t">Q4 Supports</div></td><td class="sub">Sprint 6</td><td class="num">2</td><td class="num"><b class="c">+1</b></td><td class="num"><b class="p">+1</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58917">#58917</a><div class="t">Q4 Supports</div></td><td class="sub">Sprint 6</td><td class="num">2</td><td class="num"><b class="c">+1</b></td><td class="num"><b class="p">+1</b></td><td><span class="pill green">both</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55492">#55492</a><div class="t">AI Image Quality Filter (Blurry / Low-Quality / Duplicate Removal)</div></td><td class="sub">Sprint 6</td><td class="num">4</td><td class="num"><b class="c">+0</b></td><td class="num"><b class="p">+1</b></td><td><span class="pill amber">PR only</span></td></tr></tbody></table></div>
+</section>
+
+<section class="sprint">
+  <div class="shead"><h2>Items left untouched<span class="dates">19 PBIs</span></h2>
+    <span class="badge warn">no evidence below</span></div>
+  <p class="scope">No child item carried a commit or a PR either, so nothing was written — per the rule.
+  Most of these are not supposed to produce code.</p>
+  <div class="tscroll"><table><thead><tr><th>Product Backlog Item</th><th>Sprint</th><th>Children read</th><th>Why nothing was inherited</th></tr></thead><tbody><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54055">#54055</a><div class="t">Prepare &amp; Verify Data for all vendors</div></td><td class="sub">Sprint 6</td><td class="num">5</td><td><span class="tag">Data prep</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53657">#53657</a><div class="t">Write Non-PO document</div></td><td class="sub">Sprint 6</td><td class="num">1</td><td><span class="tag">Documentation</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55509">#55509</a><div class="t">Create User Guide</div></td><td class="sub">Sprint 6</td><td class="num">2</td><td><span class="tag">Documentation</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60389">#60389</a><div class="t">GRN Processing Workflow</div></td><td class="sub">Sprint 6</td><td class="num">4</td><td><span class="tag">Investigation</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60390">#60390</a><div class="t">GRN Review Dashboard and Redo Matching UI</div></td><td class="sub">Sprint 6</td><td class="num">2</td><td><span class="tag">Investigation</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60761">#60761</a><div class="t">Poc GRN workflow verifying</div></td><td class="sub">Sprint 6</td><td class="num">2</td><td><span class="tag">POC</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58659">#58659</a><div class="t">[VistraVN] Research document</div></td><td class="sub">Sprint 6</td><td class="num">4</td><td><span class="tag">Research</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59872">#59872</a><div class="t">Workflow Research</div></td><td class="sub">Sprint 7</td><td class="num">8</td><td><span class="tag">Research</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55497">#55497</a><div class="t">Session Health, Scheduler &amp; Alerts (Type 2 Operations)</div></td><td class="sub">Sprint 6</td><td class="num">2</td><td><span class="tag">Support / ops</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58894">#58894</a><div class="t">Q4 Supports</div></td><td class="sub">Sprint 6</td><td class="num">20</td><td><span class="tag">Support / ops</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58915">#58915</a><div class="t">Q4 Supports</div></td><td class="sub">Sprint 6</td><td class="num">0</td><td><span class="tag">Support / ops</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58920">#58920</a><div class="t">Q4 Supports</div></td><td class="sub">Sprint 6</td><td class="num">0</td><td><span class="tag">Support / ops</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58922">#58922</a><div class="t">Q4 Supports</div></td><td class="sub">Sprint 6</td><td class="num">21</td><td><span class="tag">Support / ops</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60623">#60623</a><div class="t">Sprint 6 Support</div></td><td class="sub">Sprint 6</td><td class="num">1</td><td><span class="tag">Support / ops</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60707">#60707</a><div class="t">Q4 Supports</div></td><td class="sub">Sprint 6</td><td class="num">0</td><td><span class="tag">Support / ops</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55643">#55643</a><div class="t">Booking for INTERNET</div></td><td class="sub">Sprint 6</td><td class="num">8</td><td><span class="tag">Test / verification</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61771">#61771</a><div class="t">[INTERNET]Test/Verify booking internet</div></td><td class="sub">Sprint 7</td><td class="num">3</td><td><span class="tag">Test / verification</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55500">#55500</a><div class="t">Test Case Suite</div></td><td class="sub">Sprint 6</td><td class="num">2</td><td><span class="tag">Test artefact</span></td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55506">#55506</a><div class="t">Test Case Suite</div></td><td class="sub">Sprint 7</td><td class="num">2</td><td><span class="tag">Test artefact</span></td></tr></tbody></table></div>
+</section>
+
+<h2 class="sec">What this means for the audit</h2>
+<div class="card">
+  <p><b>Controls 23 and 24 check presence, not volume.</b> A PBI with one commit link passes exactly like a
+  PBI with 174. The links were added because the evidence existed under the children and the parent was
+  claiming none of it.</p>
+  <p>The 19 untouched items will keep failing 23/24 every week until the control is told what
+  they are. They are test suites, user guides, research notes, support and POC work — deliverables that
+  legitimately produce no repository artifact.</p>
+  <p>Board-wide, for context: <b>816</b> Done PBIs exist, <b>128</b> already carried both kinds,
+  <b>443</b> could inherit (5,379 links), and <b>245</b> have no evidence anywhere below. Only the
+  current cycle was written; the historical backlog was deliberately left alone because rewriting
+  closed sprints bumps <code>ChangedDate</code> on hundreds of items and changes no past audit score.</p>
+</div>
+
+<h2 class="sec">Audit trail &amp; reversal</h2>
+<div class="card">
+  <ul>
+    <li>Every modified item carries one comment: <code>[Board Hygiene] Linked N commit(s) and M pull
+    request link(s) inherited from the child item(s) #a, #b, …</code> — written in the same revision as the
+    links, so the item's history shows change and reason together.</li>
+    <li>Only <code>/relations/-</code> and <code>System.History</code> were touched. State, Iteration,
+    Assigned To, Remaining Work and every other field are byte-identical to before.</li>
+    <li>Nothing was deleted. To reverse an item, remove the artifact links from its Relations tab; the
+    comment stays as the record of what happened.</li>
+    <li>Run book: <code>ado_inherit_artifacts.py</code> — dry-run by default, <code>--apply</code> to write,
+    <code>--iters</code> to scope by full iteration path. Plan JSON kept at
+    <code>~/.ado_inherit_artifacts_plan.json</code>.</li>
+  </ul>
+</div>
+
+<div class="ok"><b>Verified.</b> 30 of 30 writes succeeded, 0 HTTP failures,
+0 read-back mismatches. Sample #60421: rev 10, 2 comments, state Done, iteration unchanged.</div>
+
+<footer>AFusion board hygiene · generated by the hygiene agent · 2026-11-05 16:00 UTC+7</footer>
+</div></body></html>
