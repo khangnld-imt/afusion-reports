@@ -34,5 +34,11 @@
   "updated": "2026-11-05T16:01:08+07:00",
   "url": "https://khangnld-imt.github.io/afusion-reports/c23-artifacts/",
   "summary": "30/49 Done PBIs in Sprint 6-7 linked to 648 inherited commit/PR artifacts; 19 left as is"
+ },
+ "ado-effort-backfill-s6-s7": {
+  "title": "PBI Effort backfill \u2014 Sprint 6 & 7",
+  "updated": "2026-11-06T00:43:43+07:00",
+  "url": "https://khangnld-imt.github.io/afusion-reports/ado-effort-backfill-s6-s7/",
+  "summary": "2 blank-Effort PBIs filled from child CompletedWork (65 h)"
  }
 }
