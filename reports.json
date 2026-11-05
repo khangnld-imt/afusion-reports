@@ -28,5 +28,11 @@
   "updated": "2026-11-05T11:44:00+07:00",
   "url": "https://khangnld-imt.github.io/afusion-reports/c17-validation/",
   "summary": "4 items out of sync: 3 parents open with every child Done (#55483, #55643, #59872) \u00b7 1 parent Done with an open child (#53935)"
+ },
+ "c23-artifacts": {
+  "title": "PMO controls 23/24 \u2014 commit & PR evidence on Done PBIs",
+  "updated": "2026-11-05T16:01:08+07:00",
+  "url": "https://khangnld-imt.github.io/afusion-reports/c23-artifacts/",
+  "summary": "30/49 Done PBIs in Sprint 6-7 linked to 648 inherited commit/PR artifacts; 19 left as is"
  }
 }
