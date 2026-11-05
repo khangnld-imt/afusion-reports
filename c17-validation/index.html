@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Control #17 validation — Sprint 6 &amp; 7</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f6f9;color:#16202c;
+  font:15px/1.55 "Segoe UI",-apple-system,Roboto,Arial,sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+a{color:#0b6bcb;text-decoration:none} a:hover{text-decoration:underline}
+header.hero{background:linear-gradient(135deg,#0d1826 0%,#1b3555 55%,#12555e 100%);
+  color:#fff;padding:34px 0 30px;margin-bottom:26px}
+.eyebrow{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#8fd6df;font-weight:700}
+h1{margin:10px 0 8px;font-size:31px;line-height:1.15;letter-spacing:-.01em}
+.lede{margin:0;color:#c9d8e8;max-width:760px;font-size:15.5px}
+.meta{margin-top:16px;font-size:12px;color:#93a9c2;letter-spacing:.02em}
+.meta b{color:#e6eef7;font-weight:600}
+.verdict{display:flex;gap:18px;align-items:flex-start;background:#fff;border:1px solid #e3e8ef;
+  border-left:5px solid #b3261e;border-radius:12px;padding:18px 20px;margin-bottom:18px;
+  box-shadow:0 1px 2px rgba(16,28,43,.05)}
+.verdict .vlabel{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:#8a95a3;font-weight:700;margin-bottom:3px}
+.verdict b{font-size:22px;letter-spacing:-.01em}
+.verdict p{margin:0;color:#4a5666;font-size:14px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 26px}
+.kpi{background:#fff;border:1px solid #e3e8ef;border-radius:12px;padding:14px 16px}
+.kpi b{display:block;font-size:27px;line-height:1.05;letter-spacing:-.02em}
+.kpi span{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#5b6776;
+  font-weight:700;margin-top:5px}
+.kpi i{display:block;font-style:normal;font-size:11.5px;color:#8a95a3;margin-top:6px}
+.kpi.red b{color:#b3261e} .kpi.amber b{color:#8a5a00} .kpi.green b{color:#0f9d58}
+section.sprint{background:#fff;border:1px solid #e3e8ef;border-radius:12px;padding:18px 20px 6px;
+  margin-bottom:18px;box-shadow:0 1px 2px rgba(16,28,43,.04)}
+.shead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  border-bottom:2px solid #16202c;padding-bottom:9px;margin-bottom:6px}
+h2{margin:0;font-size:17px;letter-spacing:-.01em}
+h2 .dates{font-weight:400;color:#7a8797;font-size:12.5px;margin-left:8px;letter-spacing:0}
+.badge{font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;white-space:nowrap}
+.badge.fail{background:#fdecea;color:#b3261e;border:1px solid #f3c2bd}
+.badge.pass{background:#e8f6ee;color:#0f7d46;border:1px solid #bfe6cf}
+.scope{margin:10px 0 14px;color:#7a8797;font-size:12.5px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:14px}
+.tscroll table{min-width:780px}
+th{text-align:left;background:#f0f3f7;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  color:#5b6776;padding:8px 10px;border-bottom:1px solid #e3e8ef}
+td{padding:11px 10px;border-top:1px solid #eef1f5;vertical-align:top}
+tr:hover td{background:#fbfcfe}
+td.item{min-width:280px}
+td.item>a{font-weight:700;font-size:13.5px}
+td .t{color:#3d4a5a;margin-top:2px}
+td.fix{color:#4a5666;font-size:12.5px;min-width:190px}
+td.sub,.sub{color:#7a8797;font-size:11.5px}
+.num{white-space:nowrap}
+.bar{display:inline-block;width:58px;height:6px;background:#e9edf2;border-radius:99px;
+  overflow:hidden;vertical-align:middle;margin-right:7px}
+.bar i{display:block;height:100%;background:#0f9d58;border-radius:99px}
+.frac{font-weight:700;font-size:12.5px;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:1.5px 8px;border-radius:999px;font-size:10.5px;font-weight:700;
+  letter-spacing:.04em;white-space:nowrap}
+.pill.green{background:#e8f6ee;color:#0f7d46;border:1px solid #bfe6cf}
+.pill.amber{background:#fff5e5;color:#8a5a00;border:1px solid #f0d8ab}
+.pill.blue{background:#eaf2fe;color:#1a5fb4;border:1px solid #c9dcf7}
+.pill.teal{background:#e6f6f8;color:#0f6b74;border:1px solid #bfe4e9}
+.pill.violet{background:#f1ecfd;color:#5b3fa8;border:1px solid #d9cdf6}
+.pill.slate{background:#eef1f5;color:#5b6776;border:1px solid #dde3ea}
+.pill.grey{background:#f2f2f2;color:#8a95a3;border:1px solid #e2e2e2}
+details{margin-top:5px} summary{cursor:pointer;color:#0b6bcb;font-size:11.5px;
+  list-style:none} summary::-webkit-details-marker{display:none}
+summary:before{content:"▸ ";color:#8a95a3}
+details[open] summary:before{content:"▾ "}
+ul.kids{margin:6px 0 2px;padding-left:16px;font-size:11.5px;color:#5b6776}
+ul.kids li{margin:2px 0} .kt{color:#7a8797}
+h2.sec{font-size:15px;letter-spacing:.02em;text-transform:uppercase;border-bottom:2px solid #16202c;
+  padding-bottom:7px;margin:30px 0 12px}
+.card{background:#fff;border:1px solid #e3e8ef;border-radius:12px;padding:16px 20px;margin-bottom:18px}
+.card p{margin:0 0 10px;color:#4a5666;font-size:13.5px}
+.card ul{margin:6px 0 0;padding-left:18px;color:#4a5666;font-size:13px}
+.card li{margin:5px 0}
+.note{background:#fff8e8;border:1px solid #f0d8ab;border-left:4px solid #d99a00;
+  border-radius:0 10px 10px 0;padding:12px 16px;font-size:13px;color:#6b4a00;margin:14px 0}
+.none{color:#8a95a3;font-size:13px;padding:6px 0 14px}
+code{background:#f0f3f7;border:1px solid #e3e8ef;border-radius:5px;padding:1px 5px;
+  font:12px/1.4 Consolas,monospace}
+footer{margin:34px 0 46px;color:#8a95a3;font-size:11.5px;text-align:center}
+@media (max-width:860px){
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  table{font-size:12px} .tscroll table{min-width:720px}
+  td.item{min-width:220px} td.fix{min-width:150px}
+  h1{font-size:25px}
+}
+</style></head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">PMO / QT34 · Control #17 · Validation</div>
+  <h1>Parent status vs subtask progress</h1>
+  <p class="lede">Does every parent still reflect what its children are actually doing?
+     Checked across <b>Sprint 6</b> and <b>Sprint 7</b> of the AFusion board — read-only, nothing changed.</p>
+  <div class="meta">Snapshot <b>2026-11-05 11:16 (UTC+7)</b> ·
+     Source <b>devops.imt-soft.com/Inheritance/AFusion</b> ·
+     Method: each parent's own child links, Removed children ignored</div>
+</div></header>
+
+<main class="wrap">
+
+<div class="verdict">
+  <div>
+    <span class="vlabel">Verdict</span>
+    <b>4 items out of sync</b>
+  </div>
+  <p><b>3 parents are still open while every child is Done</b>
+     (3 in Sprint 6, 2 still visible from Sprint 7 — two items sit in both),
+     and <b>1 parent is Done with a child still open</b>.
+     The board is behind the work: those PBIs are finished in substance but not in state,
+     so sprint reports and burndowns still count them as open.</p>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><b>119</b><span>Parents evaluated</span>
+     <i>86 in Sprint 6 · 54 in Sprint 7</i></div>
+  <div class="kpi red"><b>3</b><span>Lagging parent</span>
+     <i>children all Done, parent still open</i></div>
+  <div class="kpi amber"><b>1</b><span>Closed too early</span>
+     <i>parent Done with live children</i></div>
+  <div class="kpi green"><b>2</b><span>Exempt containers</span>
+     <i>Epic/Feature — policy exception</i></div>
+</div>
+
+
+<section class="sprint">
+  <div class="shead">
+    <h2>Sprint 6 <span class="dates">2026-10-12 → 2026-10-23</span></h2>
+    <span class="badge fail">3 out of sync</span>
+  </div>
+  <p class="scope">86 parent items checked · 294 work items
+     loaded from the iteration (plus every parent and child linked from them)</p>
+  <div class="tscroll"><table><thead><tr><th>Work item</th><th>Type</th><th>State</th><th>Children done</th><th>Owner</th><th>Iteration</th><th>Last child closed</th><th>Suggested action</th></tr></thead><tbody><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55483">#55483</a><div class="t">AI Content Reading &amp; File Naming per Convention</div><details><summary>8 child item(s)</summary><ul class="kids"><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55555">#55555</a> <span class="pill green">Done</span> <span class="kt">Apply naming convention (cag2...MMYYYY) per doc type</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55559">#55559</a> <span class="pill green">Done</span> <span class="kt">Implement AI content reading &amp; classify into 21 doc types</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55689">#55689</a> <span class="pill green">Done</span> <span class="kt">[QC] Check BOT reads file content and renames files</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/56691">#56691</a> <span class="pill green">Done</span> <span class="kt">[QC] Re-check BOT reads file content and renames files</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58052">#58052</a> <span class="pill green">Done</span> <span class="kt">[SFMS] Không xác định được vendor</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58055">#58055</a> <span class="pill green">Done</span> <span class="kt">[Individual Tracker] File không xác định được Vendor nhưng không hiển thị &quot;Unknown Client&quot; ở cột Vendor Code</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58056">#58056</a> <span class="pill green">Done</span> <span class="kt">[Notify Mail] File bị lỗi không hiển thị phần &quot;Unknown Client&quot; trên nội dung mail</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58230">#58230</a> <span class="pill green">Done</span> <span class="kt">[Send mail] Gửi mail chưa đúng PIC</span></li></ul></details></td><td>Product Backlog Item</td><td><span class="pill amber">Ready for QA</span></td><td class="num"><span class="bar"><i style="width:100%"></i></span><span class="frac">8/8</span><div class="sub">8 Done</div></td><td>Phong Phan Hoai</td><td class="sub">Sprint 6</td><td class="sub">10 d ago</td><td class="fix">Close the parent (set <b>Done</b>) — or reopen the child that is not really finished, so the board tells the truth.</td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55643">#55643</a><div class="t">Booking for INTERNET</div><details><summary>8 child item(s)</summary><ul class="kids"><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55665">#55665</a> <span class="pill green">Done</span> <span class="kt">Journal creating form internet booking logic</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/56768">#56768</a> <span class="pill green">Done</span> <span class="kt">Meeting get logic Internet</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/56791">#56791</a> <span class="pill green">Done</span> <span class="kt">Meeting for INTERNET logic confirmation</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/57687">#57687</a> <span class="pill green">Done</span> <span class="kt">Internet workflow solution planning</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58408">#58408</a> <span class="pill green">Done</span> <span class="kt">Internet invoice classification dispatch workflow</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59254">#59254</a> <span class="pill green">Done</span> <span class="kt">E2E running/testing on Internet workflow</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59646">#59646</a> <span class="pill green">Done</span> <span class="kt">Resolve issue where matching description does not return valid value on internet invoices</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60622">#60622</a> <span class="pill green">Done</span> <span class="kt">[Download tax portal]Không download được invoice INTERNET</span></li></ul></details></td><td>Product Backlog Item</td><td><span class="pill amber">Approved</span></td><td class="num"><span class="bar"><i style="width:100%"></i></span><span class="frac">8/8</span><div class="sub">8 Done</div></td><td>Ngan Pham Thi Bich</td><td class="sub">Sprint 6</td><td class="sub">10 d ago</td><td class="fix">Close the parent (set <b>Done</b>) — or reopen the child that is not really finished, so the board tells the truth.</td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59872">#59872</a><div class="t">Workflow Research</div><details><summary>8 child item(s)</summary><ul class="kids"><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59875">#59875</a> <span class="pill green">Done</span> <span class="kt">[Aston] Workflow Research</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59994">#59994</a> <span class="pill green">Done</span> <span class="kt">[Ming] Workflow Research: Coliving WhatsApp Support Bot</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60027">#60027</a> <span class="pill green">Done</span> <span class="kt">[Aston] Review workflow</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60173">#60173</a> <span class="pill green">Done</span> <span class="kt">[Ming] Workflow Research</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60933">#60933</a> <span class="pill green">Done</span> <span class="kt">[Bank Reconciliation] Reseach and define: Case 1: payment management at ERP</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60967">#60967</a> <span class="pill green">Done</span> <span class="kt">[Bank Reconciliation] Research workflow when payment is handled by ERP</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61167">#61167</a> <span class="pill green">Done</span> <span class="kt">[Bank Reconciliation] Research and define: Case 2 – Not managing payments within the ERP</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61179">#61179</a> <span class="pill green">Done</span> <span class="kt">[Bank Reconciliation] Research workflow when payment is handled outside ERP</span></li></ul></details></td><td>Product Backlog Item</td><td><span class="pill amber">Approved</span></td><td class="num"><span class="bar"><i style="width:100%"></i></span><span class="frac">8/8</span><div class="sub">8 Done</div></td><td>Nhan Pham Vu Phuc</td><td class="sub">Sprint 7</td><td class="sub">2 h ago</td><td class="fix">Close the parent (set <b>Done</b>) — or reopen the child that is not really finished, so the board tells the truth.</td></tr></tbody></table></div>
+</section>
+
+<section class="sprint">
+  <div class="shead">
+    <h2>Sprint 7 <span class="dates">2026-10-26 → 2026-11-06</span></h2>
+    <span class="badge fail">3 out of sync</span>
+  </div>
+  <p class="scope">54 parent items checked · 303 work items
+     loaded from the iteration (plus every parent and child linked from them)</p>
+  <div class="tscroll"><table><thead><tr><th>Work item</th><th>Type</th><th>State</th><th>Children done</th><th>Owner</th><th>Iteration</th><th>Last child closed</th><th>Suggested action</th></tr></thead><tbody><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53935">#53935</a><div class="t">Attendance Rules Engine &amp; Daily Results Processing</div><details><summary>29 child item(s)</summary><ul class="kids"><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53936">#53936</a> <span class="pill green">Done</span> <span class="kt">Implement 3-token regex parser and cleaner nickname master data cache</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53937">#53937</a> <span class="pill green">Done</span> <span class="kt">Finalize Attendance Reconciliation Rules and Audit Output</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53938">#53938</a> <span class="pill green">Done</span> <span class="kt">ClosedXML automation for Results tab with variance color highlighting</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53940">#53940</a> <span class="pill green">Done</span> <span class="kt">Implement Approved Leave Posting to Frontier</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54952">#54952</a> <span class="pill green">Done</span> <span class="kt">[QC] Sprint review &amp; planning</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55030">#55030</a> <span class="pill green">Done</span> <span class="kt">Reorganize documentation into Phase 1 &amp; 2 and update video index</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55343">#55343</a> <span class="pill green">Done</span> <span class="kt">Test 3PM summary email (content + tracker link)</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55344">#55344</a> <span class="pill green">Done</span> <span class="kt">Test approval gate (Approved / Pending / Rejected)</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/56642">#56642</a> <span class="pill green">Done</span> <span class="kt">Implement Attendance Amendment, Authorisation and Processing</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58127">#58127</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning]Báo lỗi &quot;Frontier attendance Comments field was not found&quot; khi trên tracker off trên frontier RD</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58128">#58128</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning]Báo lỗi &quot;Edit clocking Record&quot; checkbox was not found case &quot;Incomplete clocking!! Estimate the clocking for WORKIN&quot; trên frontier</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58129">#58129</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning]Báo lỗi &quot;Edit clocking Record&quot; checkbox was not found case trên Frontier &quot;Late&quot; trên tracker đúng giờ</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58130">#58130</a> <span class="pill slate">New</span> <span class="kt">[JH Cleaning]Case trên Tracker &quot;AL&quot; or &quot;MC&quot; or một loại nghỉ khác nhưng trên Frontier để NPL</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58132">#58132</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning]Case MC đã tạo trên Frontier nhưng bot thấy vẫn create nhưng create lỗi</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58134">#58134</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning]Chỉnh câu note case MC thiếu document</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58135">#58135</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning]Chưa update Status &quot;Failed&quot; khi leave entry trên Frontier thiếu document</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58161">#58161</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning]Case k tìm thấy transaction đang để status &quot;pending&quot;</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58162">#58162</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning]Báo lỗi &quot;Employee validation failed: Employee JH_197 had resigned before 2026-08-30.&quot; mặc dù chưa thấy nhân viên nghỉ</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58163">#58163</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning]Bỏ từ &quot; Manual review required.&quot; khi mismatched</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58169">#58169</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning]Chạy case earrly và late nhưng báo lỗi &quot;Frontier field #selWSID was not found.&quot;</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58208">#58208</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning]Case CL chưa nhập được leave entry</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58210">#58210</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning]Case MC đã tồn tại thiếu file đính kèm sau đó upload file lên nên chỉnh câu note dễ hiểu</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58211">#58211</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning]Nếu late k tạo đưuọc leave entry alert ra chạy qua cái khác k dừng luôn wf</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58217">#58217</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning] K có note work item lên chỗ Reason khách đọc sẽ k hiểu case tạo MC</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58346">#58346</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning] Case MC trên Frontier MC trên Attendance report MC</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58388">#58388</a> <span class="pill green">Done</span> <span class="kt">[QC] Check update leave type CL and remove column</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58445">#58445</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning] 2 Cột &quot;Planned Work Duration&quot; và cột &quot;Actual Work Duration&quot; chưa có dữ liệu</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58473">#58473</a> <span class="pill green">Done</span> <span class="kt">[JH Cleaning] Chưa handle case attendance report gửi n lần</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58700">#58700</a> <span class="pill green">Done</span> <span class="kt">Deploy workflow to VM of customer</span></li></ul></details></td><td>Product Backlog Item</td><td><span class="pill green">Done</span></td><td class="num"><span class="bar"><i style="width:97%"></i></span><span class="frac">28/29</span><div class="sub">28 Done, 1 New</div></td><td>Thuong Le Anh</td><td class="sub">Sprint 4</td><td class="sub">14 d ago</td><td class="fix">Reopen the parent, or finish / move the open child (#58130) — a Done parent cannot carry live work.</td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55643">#55643</a><div class="t">Booking for INTERNET</div><details><summary>8 child item(s)</summary><ul class="kids"><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55665">#55665</a> <span class="pill green">Done</span> <span class="kt">Journal creating form internet booking logic</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/56768">#56768</a> <span class="pill green">Done</span> <span class="kt">Meeting get logic Internet</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/56791">#56791</a> <span class="pill green">Done</span> <span class="kt">Meeting for INTERNET logic confirmation</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/57687">#57687</a> <span class="pill green">Done</span> <span class="kt">Internet workflow solution planning</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58408">#58408</a> <span class="pill green">Done</span> <span class="kt">Internet invoice classification dispatch workflow</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59254">#59254</a> <span class="pill green">Done</span> <span class="kt">E2E running/testing on Internet workflow</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59646">#59646</a> <span class="pill green">Done</span> <span class="kt">Resolve issue where matching description does not return valid value on internet invoices</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60622">#60622</a> <span class="pill green">Done</span> <span class="kt">[Download tax portal]Không download được invoice INTERNET</span></li></ul></details></td><td>Product Backlog Item</td><td><span class="pill amber">Approved</span></td><td class="num"><span class="bar"><i style="width:100%"></i></span><span class="frac">8/8</span><div class="sub">8 Done</div></td><td>Ngan Pham Thi Bich</td><td class="sub">Sprint 6</td><td class="sub">10 d ago</td><td class="fix">Close the parent (set <b>Done</b>) — or reopen the child that is not really finished, so the board tells the truth.</td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59872">#59872</a><div class="t">Workflow Research</div><details><summary>8 child item(s)</summary><ul class="kids"><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59875">#59875</a> <span class="pill green">Done</span> <span class="kt">[Aston] Workflow Research</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59994">#59994</a> <span class="pill green">Done</span> <span class="kt">[Ming] Workflow Research: Coliving WhatsApp Support Bot</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60027">#60027</a> <span class="pill green">Done</span> <span class="kt">[Aston] Review workflow</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60173">#60173</a> <span class="pill green">Done</span> <span class="kt">[Ming] Workflow Research</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60933">#60933</a> <span class="pill green">Done</span> <span class="kt">[Bank Reconciliation] Reseach and define: Case 1: payment management at ERP</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60967">#60967</a> <span class="pill green">Done</span> <span class="kt">[Bank Reconciliation] Research workflow when payment is handled by ERP</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61167">#61167</a> <span class="pill green">Done</span> <span class="kt">[Bank Reconciliation] Research and define: Case 2 – Not managing payments within the ERP</span></li><li><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61179">#61179</a> <span class="pill green">Done</span> <span class="kt">[Bank Reconciliation] Research workflow when payment is handled outside ERP</span></li></ul></details></td><td>Product Backlog Item</td><td><span class="pill amber">Approved</span></td><td class="num"><span class="bar"><i style="width:100%"></i></span><span class="frac">8/8</span><div class="sub">8 Done</div></td><td>Nhan Pham Vu Phuc</td><td class="sub">Sprint 7</td><td class="sub">2 h ago</td><td class="fix">Close the parent (set <b>Done</b>) — or reopen the child that is not really finished, so the board tells the truth.</td></tr></tbody></table></div>
+</section>
+
+<h2 class="sec">Exempt by team policy</h2>
+<div class="card">
+  <p>Epic and Feature containers are excluded from control #17 — the team keeps programme containers
+     open after their children close, and the PMO audit skips them the same way. Listed for
+     completeness, not as findings.</p>
+  <div class="tscroll"><table><thead><tr><th>Work item</th><th>Type</th><th>State</th><th>Children done</th>
+    <th>Owner</th><th>Iteration</th><th>Last change</th></tr></thead>
+    <tbody><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53669">#53669</a><div class="t">JH Cleanning</div></td><td>Epic</td><td><span class="pill blue">In Progress</span></td><td class="num"><span class="bar"><i style="width:100%"></i></span><span class="frac">3/3</span></td><td>Khanh Dinh Quoc</td><td class="sub">Sprint 4</td><td class="sub">52.1 d ago since last change</td></tr><tr><td class="item"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60386">#60386</a><div class="t">Phuc Long</div></td><td>Epic</td><td><span class="pill blue">In Progress</span></td><td class="num"><span class="bar"><i style="width:100%"></i></span><span class="frac">1/1</span></td><td>Thuong Le Anh</td><td class="sub">Sprint 7</td><td class="sub">7.1 d ago since last change</td></tr></tbody></table></div>
+</div>
+
+<h2 class="sec">How this was checked</h2>
+<div class="card">
+  <ul>
+    <li><b>Scope.</b> Every work item under <code>AFusion\Projects Development\Sprint 6</code> and
+        <code>Sprint 7</code>, plus every parent those items point to — a parent may live in another
+        iteration, and it is still the parent that has to be accurate.</li>
+    <li><b>Links.</b> Each parent's own <code>Hierarchy-Forward</code> relations, de-duplicated.
+        Child lists are not inferred from the children's back-links, which double-counts.</li>
+    <li><b>Lagging</b> = parent state is not Done/Removed and every live child is Done.
+        <b>Closed too early</b> = parent is Done and at least one child is not Done.
+        Children in <i>Removed</i> are ignored on both sides.</li>
+    <li><b>Exempt.</b> Epic and Feature, matching the audit's own exception list.</li>
+  </ul>
+  <div class="note"><b>Board moved while this was running.</b> #61101 <i>Update UI/UX on Account Payable
+    menu</i> was a finding in the 09:03 audit (its children were all Done). Two new defects —
+    #62026 and #62027 — were filed under it at 11:15, so it is no longer “all children done” and is
+    not listed above. Re-check before acting on anything from the morning audit.
+    <br><br>Also worth knowing: that 09:03 audit counted #61101's links twice (“6 children” for 3
+    real ones) because both sides of every parent/child link were appended to the same list. The
+    verdicts were unaffected; the counts in the audit evidence were not. Fixed in the audit loader.</div>
+</div>
+
+<footer>Generated by Board Hygiene · 2026-11-05 11:16 (UTC+7) ·
+  read-only validation, no work items were modified ·
+  control #17 — “the parent work-item status does not accurately reflect the progress of its subtasks”</footer>
+</main>
+</body></html>
