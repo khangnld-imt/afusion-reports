@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sprint 7 → Sprint 8 Carry-over · AFusion</title>
+<style>
+:root{
+ --bg:#0d1117; --panel:#161b22; --panel2:#1c2230; --line:#2a3242;
+ --tx:#e6edf3; --mut:#8b98a9; --acc:#58a6ff; --grn:#3fb950; --amb:#d29922;
+ --red:#f85149; --pur:#bc8cff; --cyan:#39d353;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+ font:15px/1.55 -apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+ padding:28px 20px 60px}
+.wrap{max-width:1180px;margin:0 auto}
+h1{font-size:27px;margin:0 0 4px;letter-spacing:-.4px}
+.sub{color:var(--mut);font-size:13.5px;margin-bottom:22px}
+.sub b{color:var(--tx);font-weight:600}
+.verdict{background:linear-gradient(135deg,#0f2d1c,#12251c 60%,#161b22);
+ border:1px solid #1f6f3f;border-left:4px solid var(--grn);border-radius:12px;
+ padding:18px 22px;margin-bottom:24px}
+.verdict .vt{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:#6fbf85;font-weight:700}
+.verdict .vh{font-size:20px;font-weight:650;margin:5px 0 6px}
+.verdict p{margin:0;color:#a9b7c6;font-size:13.5px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:26px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:15px 16px}
+.kpi .n{font-size:29px;font-weight:700;line-height:1.1;letter-spacing:-1px}
+.kpi .l{font-size:11.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.7px;margin-top:5px}
+.kpi .h{font-size:11.5px;color:#6b7787;margin-top:3px}
+.k-blue .n{color:var(--acc)} .k-grn .n{color:var(--grn)} .k-amb .n{color:var(--amb)}
+.k-pur .n{color:var(--pur)} .k-cyn .n{color:var(--cyan)} .k-red .n{color:var(--red)}
+h2{font-size:16px;margin:32px 0 12px;display:flex;align-items:center;gap:9px}
+h2 .bar{width:3px;height:16px;background:var(--acc);border-radius:2px;display:inline-block}
+h2 .n2{color:var(--mut);font-weight:400;font-size:13px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:9px 12px;background:var(--panel2);color:var(--mut);
+ font-size:10.5px;text-transform:uppercase;letter-spacing:.7px;font-weight:600;
+ border-bottom:1px solid var(--line);white-space:nowrap}
+th.num{text-align:right}
+td{padding:9px 12px;border-bottom:1px solid #1e2531;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#1a2130}
+.mono{font-family:ui-monospace,'Cascadia Code',Consolas,monospace;font-size:12.5px;white-space:nowrap}
+a{color:var(--acc);text-decoration:none} a:hover{text-decoration:underline}
+.newid a{color:var(--grn);font-weight:600}
+.arrow{color:var(--mut);text-align:center;width:22px;padding-left:0;padding-right:0}
+.ttl{max-width:430px}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.small{font-size:12px;color:var(--mut)}
+.iter{font-family:ui-monospace,Consolas,monospace;font-size:11.5px;color:var(--mut);white-space:nowrap}
+.typ{font-size:11px;color:var(--mut);white-space:nowrap}
+.pill{display:inline-block;padding:1.5px 7px;border-radius:20px;font-size:10.5px;
+ font-weight:600;letter-spacing:.3px;white-space:nowrap}
+.s-done{background:#0f2d1c;color:#4ac26b;border:1px solid #1f6f3f}
+.s-todo{background:#2b2410;color:#e3b341;border:1px solid #6b5316}
+.s-new{background:#21262d;color:#9aa8b8;border:1px solid #303a48}
+.s-prog{background:#12243d;color:#6cb6ff;border:1px solid #1f4d80}
+.s-rfv{background:#2a1f3d;color:#c297ff;border:1px solid #54368c}
+.s-com{background:#0f2a2d;color:#4fd1c5;border:1px solid #1b5f63}
+.s-app{background:#1c2333;color:#8ab4f8;border:1px solid #2c3a55}
+.s-rem{background:#2b1618;color:#f0777a;border:1px solid #6b2b2e}
+.s-qa{background:#241f33;color:#b39ddb;border:1px solid #453a63}
+.cnt{color:#5c6675;font-size:11px;margin-right:7px}
+.tscroll{overflow-x:auto}
+details{margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px}
+summary{padding:13px 16px;cursor:pointer;font-size:13.5px;font-weight:600;color:#c9d5e3}
+summary:hover{color:#fff}
+details table{border-top:1px solid var(--line)}
+.note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amb);
+ border-radius:10px;padding:14px 18px;font-size:13px;color:#a9b7c6;margin-top:14px}
+.note b{color:var(--tx)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+ul{margin:8px 0 0;padding-left:20px;color:#a9b7c6;font-size:13px}
+li{margin:5px 0}
+.foot{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);
+ color:#5c6675;font-size:11.5px;line-height:1.7}
+code{background:#1c2230;padding:1.5px 5px;border-radius:4px;font-size:11.5px;color:#9fd0ff}
+</style></head><body><div style="background:#101c2b;color:#dbe6f2;font:12.5px/1.6 'Segoe UI',-apple-system,Roboto,Arial,sans-serif;padding:9px 20px;text-align:center">Archived run <b>2026-11-06 · 16:00</b> — frozen snapshot · <a href="../" style="color:#8fbaff;text-decoration:none">latest sprint8-carryover report →</a> · <a href="../../" style="color:#8fbaff;text-decoration:none">all reports</a></div><div class="wrap">
+
+<h1>Sprint 7 → Sprint 8 Carry-over</h1>
+<div class="sub">AFusion · executed <b>2026-11-06</b> · Sprint 7 (26 Oct – 06 Nov) closing → Sprint 8 (<b>09 Nov – 20 Nov</b>) ·
+operator <b>Board&nbsp;Hygiene</b></div>
+
+<div class="verdict">
+  <div class="vt">Result</div>
+  <div class="vh">8 PBIs cloned · 11 PBIs moved whole · 3 closed · 0 failures</div>
+  <p>110 work items changed. 57 open child items were reparented onto Sprint 8 clone PBIs carrying
+  <b style="color:#4ac26b">182h&nbsp;of&nbsp;Effort</b>; 31 more moved with their PBI unchanged.
+  Sprint 7 now holds only Done / In Progress / Ready-for-Verify work — one item left, and it is the one targeted for today.</p>
+</div>
+
+<div class="kpis">
+  <div class="kpi k-grn"><div class="n">8</div><div class="l">Clone PBIs created</div><div class="h">Committed · Sprint 8</div></div>
+  <div class="kpi k-blue"><div class="n">57</div><div class="l">Items reparented</div><div class="h">182h remaining work</div></div>
+  <div class="kpi k-pur"><div class="n">11</div><div class="l">PBIs moved whole</div><div class="h">31 children · 140h</div></div>
+  <div class="kpi k-amb"><div class="n">3</div><div class="l">Old PBIs closed</div><div class="h">all children Done</div></div>
+  <div class="kpi k-cyn"><div class="n">110</div><div class="l">Work items touched</div><div class="h">every one commented</div></div>
+  <div class="kpi k-red"><div class="n">0</div><div class="l">Failures</div><div class="h">verified by read-back</div></div>
+</div>
+
+<h2><span class="bar"></span>Cloned into Sprint 8 <span class="n2">— PBI had completed work this sprint, so it keeps its history and the remainder continues in a clone</span></h2>
+<div class="card"><div class="tscroll"><table>
+<thead><tr><th style="width:74px">Old</th><th style="width:24px"></th><th style="width:74px">New</th><th>Title</th><th class="num" style="width:66px">Effort</th><th class="num" style="width:56px">Kids</th><th style="width:210px">Carried states</th></tr></thead>
+<tbody><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55600" target="_blank">#55600</a></td>
+<td class="arrow">→</td>
+<td class="mono newid"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62155" target="_blank">#62155</a></td>
+<td class="ttl">PO Oversea Import D365 (Sprint 8)</td>
+<td class="num"><b>11h</b></td>
+<td class="num">2</td>
+<td><span class="pill s-todo">To Do</span><span class="cnt">×2</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/56046" target="_blank">#56046</a></td>
+<td class="arrow">→</td>
+<td class="mono newid"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62156" target="_blank">#62156</a></td>
+<td class="ttl">Hourly Collection, Extraction &amp; PDF Splitting (Sprint 8)</td>
+<td class="num"><b>32h</b></td>
+<td class="num">12</td>
+<td><span class="pill s-new">New</span><span class="cnt">×12</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/56063" target="_blank">#56063</a></td>
+<td class="arrow">→</td>
+<td class="mono newid"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62157" target="_blank">#62157</a></td>
+<td class="ttl">Invoice–PO Matching &amp; AP Tracker Sheet Population (Sprint 8)</td>
+<td class="num"><b>14h</b></td>
+<td class="num">7</td>
+<td><span class="pill s-new">New</span><span class="cnt">×7</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/56066" target="_blank">#56066</a></td>
+<td class="arrow">→</td>
+<td class="mono newid"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62158" target="_blank">#62158</a></td>
+<td class="ttl">Hourly Posting of Approved Invoices to Xero (Sprint 8)</td>
+<td class="num"><b>2h</b></td>
+<td class="num">1</td>
+<td><span class="pill s-new">New</span><span class="cnt">×1</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/56067" target="_blank">#56067</a></td>
+<td class="arrow">→</td>
+<td class="mono newid"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62159" target="_blank">#62159</a></td>
+<td class="ttl">Email Notifications to PIC (Processing &amp; Posting) (Sprint 8)</td>
+<td class="num"><b>4h</b></td>
+<td class="num">1</td>
+<td><span class="pill s-todo">To Do</span><span class="cnt">×1</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60621" target="_blank">#60621</a></td>
+<td class="arrow">→</td>
+<td class="mono newid"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62160" target="_blank">#62160</a></td>
+<td class="ttl">Sprint 8 Support</td>
+<td class="num"><b>86h</b></td>
+<td class="num">25</td>
+<td><span class="pill s-new">New</span><span class="cnt">×19</span> <span class="pill s-todo">To Do</span><span class="cnt">×6</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60705" target="_blank">#60705</a></td>
+<td class="arrow">→</td>
+<td class="mono newid"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62161" target="_blank">#62161</a></td>
+<td class="ttl">Implement UI Approval (Sprint 8)</td>
+<td class="num"><b>24h</b></td>
+<td class="num">7</td>
+<td><span class="pill s-new">New</span><span class="cnt">×4</span> <span class="pill s-todo">To Do</span><span class="cnt">×3</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60993" target="_blank">#60993</a></td>
+<td class="arrow">→</td>
+<td class="mono newid"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62162" target="_blank">#62162</a></td>
+<td class="ttl">UAT Feedback (Sprint 8)</td>
+<td class="num"><b>9h</b></td>
+<td class="num">2</td>
+<td><span class="pill s-todo">To Do</span><span class="cnt">×2</span></td>
+</tr></tbody></table></div></div>
+
+<h2><span class="bar"></span>Moved whole to Sprint 8 <span class="n2">— no child was completed this sprint, so the PBI and its backlog travel as-is</span></h2>
+<div class="card"><div class="tscroll"><table>
+<thead><tr><th style="width:74px">PBI</th><th>Title</th><th style="width:110px">State</th><th style="width:170px">From</th><th class="num" style="width:56px">Kids</th><th style="width:210px">Carried states</th></tr></thead>
+<tbody><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/49869" target="_blank">#49869</a></td>
+<td class="ttl">Reconcile D365 VAT Statement Invoices against HDDT Portal</td>
+<td><span class="pill s-app">Approved</span></td>
+<td class="iter">Projects Development\Sprint 6</td>
+<td class="num">7</td>
+<td><span class="pill s-todo">To Do</span><span class="cnt">×7</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59606" target="_blank">#59606</a></td>
+<td class="ttl">Reconcile HDDT Portal Invoices against D365 VAT Statement</td>
+<td><span class="pill s-app">Approved</span></td>
+<td class="iter">Projects Development\Sprint 7</td>
+<td class="num">5</td>
+<td><span class="pill s-todo">To Do</span><span class="cnt">×5</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61040" target="_blank">#61040</a></td>
+<td class="ttl">Metric Catalog &amp; Data Contract platform (schema, import, validation)</td>
+<td><span class="pill s-new">New</span></td>
+<td class="iter">Projects Development\Sprint 7</td>
+<td class="num">5</td>
+<td><span class="pill s-todo">To Do</span><span class="cnt">×5</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61042" target="_blank">#61042</a></td>
+<td class="ttl">Permission freshness &amp; data-scope foundation for AI Insight</td>
+<td><span class="pill s-new">New</span></td>
+<td class="iter">Projects Development\Sprint 7</td>
+<td class="num">4</td>
+<td><span class="pill s-todo">To Do</span><span class="cnt">×4</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61041" target="_blank">#61041</a></td>
+<td class="ttl">Tenant Setting: dashboard prompt, AI suggestions, daily schedule</td>
+<td><span class="pill s-new">New</span></td>
+<td class="iter">Projects Development\Sprint 7</td>
+<td class="num">3</td>
+<td><span class="pill s-todo">To Do</span><span class="cnt">×3</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61043" target="_blank">#61043</a></td>
+<td class="ttl">Snapshot daily generation + on-demand Refresh</td>
+<td><span class="pill s-new">New</span></td>
+<td class="iter">Projects Development\Sprint 8</td>
+<td class="num">2</td>
+<td><span class="pill s-todo">To Do</span><span class="cnt">×2</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53654" target="_blank">#53654</a></td>
+<td class="ttl">Write WF4 document</td>
+<td><span class="pill s-app">Approved</span></td>
+<td class="iter">Projects Development\Sprint 7</td>
+<td class="num">1</td>
+<td><span class="pill s-todo">To Do</span><span class="cnt">×1</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58438" target="_blank">#58438</a></td>
+<td class="ttl">Test Case Suite</td>
+<td><span class="pill s-app">Approved</span></td>
+<td class="iter">Projects Development\Sprint 6</td>
+<td class="num">1</td>
+<td><span class="pill s-todo">To Do</span><span class="cnt">×1</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58439" target="_blank">#58439</a></td>
+<td class="ttl">Create PRD for AP Process</td>
+<td><span class="pill s-app">Approved</span></td>
+<td class="iter">Projects Development\Sprint 7</td>
+<td class="num">1</td>
+<td><span class="pill s-todo">To Do</span><span class="cnt">×1</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58440" target="_blank">#58440</a></td>
+<td class="ttl">Create UAT Plan</td>
+<td><span class="pill s-app">Approved</span></td>
+<td class="iter">Projects Development\Sprint 7</td>
+<td class="num">1</td>
+<td><span class="pill s-todo">To Do</span><span class="cnt">×1</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58441" target="_blank">#58441</a></td>
+<td class="ttl">Create User Guide</td>
+<td><span class="pill s-app">Approved</span></td>
+<td class="iter">Projects Development\Sprint 7</td>
+<td class="num">1</td>
+<td><span class="pill s-todo">To Do</span><span class="cnt">×1</span></td>
+</tr></tbody></table></div></div>
+
+<h2><span class="bar"></span>Old PBIs set to Done <span class="n2">— every remaining child is Done or Removed</span></h2>
+<div class="card"><div class="tscroll"><table>
+<thead><tr><th style="width:74px">PBI</th><th>Title</th><th class="num" style="width:90px">Children</th><th style="width:240px">Final child states</th></tr></thead>
+<tbody><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55600" target="_blank">#55600</a></td>
+<td class="ttl">PO Oversea Import D365</td>
+<td class="num">2</td>
+<td><span class="pill s-new">None</span><span class="cnt">×2</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/56046" target="_blank">#56046</a></td>
+<td class="ttl">Hourly Collection, Extraction &amp; PDF Splitting</td>
+<td class="num">39</td>
+<td><span class="pill s-new">None</span><span class="cnt">×39</span></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/56067" target="_blank">#56067</a></td>
+<td class="ttl">Email Notifications to PIC (Processing &amp; Posting)</td>
+<td class="num">4</td>
+<td><span class="pill s-new">None</span><span class="cnt">×4</span></td>
+</tr></tbody></table></div></div>
+
+<h2><span class="bar"></span>Old PBIs left open <span class="n2">— still has In Progress / Ready-for-Verify work, so it cannot be closed</span></h2>
+<div class="card"><div class="tscroll"><table>
+<thead><tr><th style="width:74px">PBI</th><th>Title</th><th style="width:110px">State</th><th class="num" style="width:60px">Open</th><th style="width:230px">Blocking items</th></tr></thead>
+<tbody><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/56063" target="_blank">#56063</a></td>
+<td class="ttl">Invoice–PO Matching &amp; AP Tracker Sheet Population</td>
+<td><span class="pill s-qa">Ready for QA</span></td>
+<td class="num">0</td>
+<td class="mono small"></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/56066" target="_blank">#56066</a></td>
+<td class="ttl">Hourly Posting of Approved Invoices to Xero</td>
+<td><span class="pill s-qa">Ready for QA</span></td>
+<td class="num">0</td>
+<td class="mono small"></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60621" target="_blank">#60621</a></td>
+<td class="ttl">Sprint 7 Support</td>
+<td><span class="pill s-app">Approved</span></td>
+<td class="num">0</td>
+<td class="mono small"></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60705" target="_blank">#60705</a></td>
+<td class="ttl">Implement UI Approval</td>
+<td><span class="pill s-app">Approved</span></td>
+<td class="num">0</td>
+<td class="mono small"></td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60993" target="_blank">#60993</a></td>
+<td class="ttl">UAT Feedback</td>
+<td><span class="pill s-new">New</span></td>
+<td class="num">0</td>
+<td class="mono small"></td>
+</tr></tbody></table></div></div>
+
+<details><summary>▸ Every carried work item (88)</summary>
+<div class="tscroll"><table>
+<thead><tr><th>ID</th><th>Type</th><th>State</th><th>Title</th><th>Destination</th></tr></thead>
+<tbody><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53726" target="_blank">#53726</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Generate and Send Consolidated Reconciliation Summary</td>
+<td class="small">moved with PBI #49869</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53727" target="_blank">#53727</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Add Automated Test Coverage for VAT Reconciliation Workflow</td>
+<td class="small">moved with PBI #49869</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/57094" target="_blank">#57094</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">[QC] Sync Tracker PO Oversea</td>
+<td class="small">clone of #55600 → #62155</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/57095" target="_blank">#57095</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">[QC] Check download and extract invoice then push to queue for PO Oversea</td>
+<td class="small">clone of #55600 → #62155</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58130" target="_blank">#58130</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[JH Cleaning]Case trên Tracker "AL" or "MC" or một loại nghỉ khác nhưng trên Frontier để NPL</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58398" target="_blank">#58398</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">[QC] Check send mail Processing and Posting</td>
+<td class="small">clone of #56067 → #62159</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58594" target="_blank">#58594</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Matching PO] Chạy xong không thấy update queue</td>
+<td class="small">clone of #56063 → #62157</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58657" target="_blank">#58657</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Matching PO] Field không có data thì đang k matching với PO</td>
+<td class="small">clone of #56063 → #62157</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58882" target="_blank">#58882</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">[Vistra VN] WF4 Write PRD</td>
+<td class="small">moved with PBI #53654</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59121" target="_blank">#59121</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">[QC] Write test cases for AP Process</td>
+<td class="small">moved with PBI #58438</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59122" target="_blank">#59122</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">[QC] Write PRD for AP Process</td>
+<td class="small">moved with PBI #58439</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59123" target="_blank">#59123</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">[QC] Write UAT Plan for AP Process</td>
+<td class="small">moved with PBI #58440</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59124" target="_blank">#59124</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">[QC] Write User Guide for AP Process</td>
+<td class="small">moved with PBI #58441</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59266" target="_blank">#59266</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Page Number] Page number ghi vào tracker không đúng</td>
+<td class="small">clone of #56046 → #62156</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59607" target="_blank">#59607</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Filter HDDT Invoices by Statement Period</td>
+<td class="small">moved with PBI #59606</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59608" target="_blank">#59608</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Build Portal-to-D365 Reconciliation Logic</td>
+<td class="small">moved with PBI #59606</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59609" target="_blank">#59609</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Handle Duplicate and Complex HDDT Invoices</td>
+<td class="small">moved with PBI #59606</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59610" target="_blank">#59610</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Export Portal-to-D365 Reconciliation Results</td>
+<td class="small">moved with PBI #59606</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59611" target="_blank">#59611</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Add Portal-to-D365 Automated Tests</td>
+<td class="small">moved with PBI #59606</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59612" target="_blank">#59612</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Resolve Vendor Invoice Journal File Dynamically by Processing Period</td>
+<td class="small">moved with PBI #49869</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59613" target="_blank">#59613</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Perform End-to-End Reconciliation Verification for Monthly Processing</td>
+<td class="small">moved with PBI #49869</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59614" target="_blank">#59614</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Perform End-to-End Reconciliation Verification for Quarterly Processing</td>
+<td class="small">moved with PBI #49869</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59615" target="_blank">#59615</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Define Recovery Procedure for D365 MFA and Session Expiration</td>
+<td class="small">moved with PBI #49869</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59616" target="_blank">#59616</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Upgrade Vulnerable Image Processing Dependencies</td>
+<td class="small">moved with PBI #49869</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60004" target="_blank">#60004</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Page Number] Data không đúng sau khi merge</td>
+<td class="small">clone of #56046 → #62156</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60005" target="_blank">#60005</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Extract] extract bị timeout quá 3 lần ( 3 batch ) k thấy move qua folder Unextracted Files</td>
+<td class="small">clone of #56046 → #62156</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60261" target="_blank">#60261</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Speed up processing for emails with multiple orders</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60262" target="_blank">#60262</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Merge] case: 1 invoice nhiều page bị sai input khi push lên queue</td>
+<td class="small">clone of #56046 → #62156</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60691" target="_blank">#60691</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[JH]Báo duplicated mặc dù k có duplicate tin nhắn và bỏ qua file MC</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60700" target="_blank">#60700</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">[HC]Check leases to booking from 12/2025-10/2026</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60704" target="_blank">#60704</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">[HC]Check result after booking from 12/2025-10/2026</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60712" target="_blank">#60712</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Support search by column</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60713" target="_blank">#60713</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">[Purchase Order] Add API to Retrieve Column Settings</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60718" target="_blank">#60718</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Configure approval screen layout on Orchestrator</td>
+<td class="small">clone of #60705 → #62161</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60936" target="_blank">#60936</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Rounding Differences: Auto rounding amounts up or down to the nearest $0.05</td>
+<td class="small">clone of #60705 → #62161</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61016" target="_blank">#61016</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[JH]Không lấy được tin nhắn format thiếu dấu gạch</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61052" target="_blank">#61052</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Define and migrate Metric Catalog and Data Contract tables</td>
+<td class="small">moved with PBI #61040</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61053" target="_blank">#61053</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Catalog and Data Contract CRUD API with versioning</td>
+<td class="small">moved with PBI #61040</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61054" target="_blank">#61054</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">PO catalog template and import with row-error report</td>
+<td class="small">moved with PBI #61040</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61055" target="_blank">#61055</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Metric resolution gate service (every metric must have source)</td>
+<td class="small">moved with PBI #61040</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61056" target="_blank">#61056</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Collect approved catalogs for DxR, JH, KBE (PO task)</td>
+<td class="small">moved with PBI #61040</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61057" target="_blank">#61057</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Tenant Setting storage + API: generation prompt, suggestions, schedule (no truncation)</td>
+<td class="small">moved with PBI #61041</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61058" target="_blank">#61058</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Tenant Setting UI: Prompts &amp; Schedule section</td>
+<td class="small">moved with PBI #61041</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61059" target="_blank">#61059</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Suggestion config consumption with staleness rules</td>
+<td class="small">moved with PBI #61041</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61060" target="_blank">#61060</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Permission epoch mechanism for per-request permission freshness</td>
+<td class="small">moved with PBI #61042</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61061" target="_blank">#61061</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Permission-scoped cache keys for insight data paths</td>
+<td class="small">moved with PBI #61042</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61062" target="_blank">#61062</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Data-scope rule model for records, drill-downs and exports</td>
+<td class="small">moved with PBI #61042</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61063" target="_blank">#61063</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">New permission constants + activation roles</td>
+<td class="small">moved with PBI #61042</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61064" target="_blank">#61064</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Snapshot entities, storage layout and retention</td>
+<td class="small">moved with PBI #61043</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61066" target="_blank">#61066</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Manual Refresh with last-verified-refresh semantics</td>
+<td class="small">moved with PBI #61043</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61157" target="_blank">#61157</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[JH]Chỗ tìm employname cover case dưới hình</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61170" target="_blank">#61170</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[AP Tracker] Lỗi upload file + file dưới local bị lỗi</td>
+<td class="small">clone of #56046 → #62156</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61190" target="_blank">#61190</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[JH]Chưa điều chỉnh case OT</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61191" target="_blank">#61191</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[JH]Chưa điều chỉnh trên Frontier giống Tracker case early</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61192" target="_blank">#61192</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[JH]Chưa điều chỉnh case trên Frontier AB, trên tracker AL</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61193" target="_blank">#61193</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[JH]Lấy ngảy nghỉ sai ghi vào ap tracker</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61195" target="_blank">#61195</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Bug Cholimex] [Vendor BHX] Bot đọc sai bar code và prd code</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61275" target="_blank">#61275</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Matching PO] Không update data output queue Invoice và không update status queue PO</td>
+<td class="small">clone of #56063 → #62157</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61278" target="_blank">#61278</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[AP Tracker] Để sai link Invoice Path/PO Path</td>
+<td class="small">clone of #56046 → #62156</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61279" target="_blank">#61279</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[UI Review] Chưa highlight các field validate mismatch</td>
+<td class="small">clone of #60705 → #62161</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61305" target="_blank">#61305</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Bug Cholimex] [Vendor Lotte] Bot đọc sai siêu thị</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61385" target="_blank">#61385</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Posting] Case duplicate vẫn post thành công</td>
+<td class="small">clone of #56066 → #62158</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61386" target="_blank">#61386</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Matching PO] Note validate bị mất sau khi chạy matching PO</td>
+<td class="small">clone of #56063 → #62157</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61387" target="_blank">#61387</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Classify] Case Ignored: Category sai</td>
+<td class="small">clone of #56046 → #62156</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61484" target="_blank">#61484</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Implement UI Approval</td>
+<td class="small">clone of #60705 → #62161</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61486" target="_blank">#61486</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">[Vistra VN][Dev] Migrate Execution Agent to Azure Server</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61553" target="_blank">#61553</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[JH]Chưa lấy được ngày 31/10 nếu để trống trên attendance report</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61554" target="_blank">#61554</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[JH]JH_263 ngày 30/10/2026 trên attendance report MC, trên Frontier ABS</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61556" target="_blank">#61556</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[JH]Chưa autho và điều chỉnh giống tracker</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61573" target="_blank">#61573</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Bug Cholimex] [Vendor Coop] Bot đọc sai quy cách D20 =120 nhưng có 1 số dòng là 20</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61698" target="_blank">#61698</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[HC]Period lấy k đúng </td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/61932" target="_blank">#61932</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[UI Review] Total Amount đang hiển thị sai</td>
+<td class="small">clone of #60705 → #62161</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62003" target="_blank">#62003</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Find a way to run workflows in parallel without causing WhatsApp conflicts</td>
+<td class="small">clone of #60993 → #62162</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62007" target="_blank">#62007</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Download invoice]Mapping sai PO </td>
+<td class="small">clone of #56046 → #62156</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62008" target="_blank">#62008</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Download invoice]Thay đổi thao tác UI về googgle drive desktop sync về ổ đĩa</td>
+<td class="small">clone of #56046 → #62156</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62011" target="_blank">#62011</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Download invoice]Format lại file ap tracker</td>
+<td class="small">clone of #56046 → #62156</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62012" target="_blank">#62012</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Download invoice]Wf treo</td>
+<td class="small">clone of #56046 → #62156</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62014" target="_blank">#62014</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Download invoice]Add logic tính vat_rate</td>
+<td class="small">clone of #56046 → #62156</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62028" target="_blank">#62028</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[UI]Cột status tab pending để là Matched or Mismatched</td>
+<td class="small">clone of #60705 → #62161</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62029" target="_blank">#62029</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[UI]Bên trong detail để Matched or Mismatched</td>
+<td class="small">clone of #60705 → #62161</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62109" target="_blank">#62109</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Matching]Bỏ trạng thái "Next Run" ở cột Matching Result </td>
+<td class="small">clone of #56063 → #62157</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62111" target="_blank">#62111</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[KBE] Chỉnh sửa 1 vị trí WhatsApp không khớp với bất kỳ địa điểm công việc (Job Site) nào trong danh sách công việc đã lên lịch (giả sử là hàng 1).</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62112" target="_blank">#62112</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[KBE] Công việc được tìm thấy trong tháng hiện tại nhưng không thể khớp</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62113" target="_blank">#62113</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[KBE] Công việc được tìm thấy trong tháng hiện tại nhưng không thể khớp, vì vậy hệ thống đã tìm kiếm trong một tháng trước đó nên dẫn đến sai client</td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62114" target="_blank">#62114</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Matching]Mở link PO k lên được</td>
+<td class="small">clone of #56063 → #62157</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62140" target="_blank">#62140</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[Matching]File sau khi split k nằm trong page nào trong file gốc ban đầu</td>
+<td class="small">clone of #56063 → #62157</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62144" target="_blank">#62144</a></td>
+<td class="typ">Defect</td>
+<td><span class="pill s-new">New</span></td>
+<td class="ttl">[KBE] Khi gạch ngang 2 dòng cùng 1 ô, thì nó chưa tách ra nằm 2 dòng 2 hàng </td>
+<td class="small">clone of #60621 → #62160</td>
+</tr><tr>
+<td class="mono"><a href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62150" target="_blank">#62150</a></td>
+<td class="typ">Task</td>
+<td><span class="pill s-todo">To Do</span></td>
+<td class="ttl">Find solution identify service</td>
+<td class="small">clone of #60993 → #62162</td>
+</tr></tbody></table></div></details>
+
+<h2><span class="bar"></span>What this means</h2>
+<div class="grid2">
+<div class="note"><b>Sprint 7 is clean.</b> 229 items remain, and the only open Task/Defect/Bug left behind is
+<b>#62026</b> — a UI defect whose Target Date is <code>2026-11-06</code>, i.e. today. It was deliberately excluded
+by the "Target Date is not today" rule. Everything else in Sprint 7 is Done, In Progress, Ready for Verify or Removed.</div>
+<div class="note"><b>182h of Effort moved into Sprint 8.</b> Each clone's Effort is the sum of the
+<i>Remaining Work</i> of the children carried onto it — not the original estimate — so the number reflects what is
+actually left, and completed work stays on the original PBI.</div>
+</div>
+
+<div class="note" style="border-left-color:#bc8cff"><b>Traceability.</b> Each clone links back to its original with a
+<i>Related</i> link, keeps the original Feature as parent, carries the tag <code>Sprint 8 Carryover</code>, and its
+Description names the original PBI id and the child count. Every reparented item got a <code>[Board Hygiene]</code>
+comment in the same revision as the change, so the move and its reason share one revision in ADO history.</div>
+
+<h2><span class="bar"></span>Audit trail &amp; reversal</h2>
+<div class="note">
+<b>Basis.</b> Candidates = Task / Defect / Bug in Sprint 7 whose state is not Done, In Progress or Ready for Verify
+(i.e. To Do / New / Approved / Committed) and whose Target Date is not today. 88 items qualified across 19 PBIs.<br>
+<b>Rollback.</b> The pre-change state of all 120 affected items (iteration path, parent, state) was written to
+<code>s8_audit_pre.json</code> before the first write, and the applied operations to <code>s8_audit_post.json</code>.
+Reverting is a mechanical replay of those paths; nothing was deleted, and no state was changed except the 3 closures.<br>
+<b>Not touched.</b> Description, Acceptance Criteria, Priority, Assigned To, Remaining Work and Target Date of every
+carried item are unchanged. No closed item was reopened.
+</div>
+
+<div class="foot">
+Generated by Board Hygiene · AFusion / Inheritance · devops.imt-soft.com<br>
+Every figure on this page was read back from the server after the writes, not taken from the write plan.
+</div>
+</div></body></html>
