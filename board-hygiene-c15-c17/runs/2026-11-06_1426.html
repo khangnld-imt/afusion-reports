@@ -1,0 +1,204 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Board Hygiene — Controls 15 &amp; 17, Sprint 6 &amp; 7</title>
+<style>
+:root{--bg:#0b1220;--card:#ffffff;--ink:#101a26;--mut:#5b6b7d;--line:#e3e8ef;
+--ok:#0f9d58;--warn:#c77700;--bad:#d92d20;--act:#1a73e8;--new:#7a5af8}
+*{box-sizing:border-box}
+body{margin:0;background:#f4f6fa;color:var(--ink);
+font:15px/1.55 "Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Arial,sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 64px}
+.hero{background:linear-gradient(135deg,#0b1220 0%,#132a4a 55%,#1b3f6b 100%);color:#eef4fb;
+padding:38px 0 30px;margin-bottom:-46px}
+.hero .wrap{padding-bottom:0}
+.eyebrow{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#8fb4dd;font-weight:700}
+h1{margin:10px 0 6px;font-size:31px;line-height:1.15;letter-spacing:-.02em;font-weight:700}
+.sub{color:#a9c2dd;font-size:14px;max-width:760px}
+.badge{display:inline-block;margin-top:14px;padding:5px 11px;border-radius:999px;
+background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+font-size:12px;letter-spacing:.04em;color:#d6e6f7}
+.verdict{margin-top:26px;background:var(--card);border-radius:14px;padding:20px 22px;
+box-shadow:0 10px 30px rgba(11,18,32,.16);border-left:5px solid var(--bad)}
+.verdict.good{border-left-color:var(--ok)}
+.verdict .vlabel{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);font-weight:700}
+.verdict p{margin:7px 0 0;font-size:18px;font-weight:600;line-height:1.45}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0 6px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.kpi .n{font-size:27px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.kpi .l{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mut);font-weight:700;margin-top:6px}
+.kpi .d{font-size:12.5px;color:var(--mut);margin-top:5px}
+.kpi.red .n{color:var(--bad)}.kpi.amb .n{color:var(--warn)}.kpi.grn .n{color:var(--ok)}.kpi.blu .n{color:var(--act)}
+.method{background:#eef3fa;border:1px solid #d8e3f1;border-radius:12px;padding:14px 18px;
+font-size:13px;color:#31465e;margin:16px 0 4px}
+.method b{color:#132a4a}
+.sec{margin-top:34px}
+.sec h2{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);
+margin:0 0 4px;font-weight:800}
+.sec h3{font-size:20px;margin:0 0 4px;letter-spacing:-.01em}
+.sec .lead{color:var(--mut);font-size:13.5px;margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 20px;margin-top:14px}
+.card h4{margin:0 0 2px;font-size:16px;letter-spacing:-.01em}
+.card .meta{color:var(--mut);font-size:12.5px;margin:0 0 12px}
+.tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:700;
+letter-spacing:.06em;text-transform:uppercase}
+.tag.pass{background:#e6f4ea;color:#0f7a43}.tag.fail{background:#fdecea;color:#b42318}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:680px}
+th{text-align:left;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--mut);
+font-weight:700;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 10px;border-bottom:1px solid #eef1f6;vertical-align:top}
+tr:last-child td{border-bottom:none}
+a.wid{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12.5px;
+color:var(--act);text-decoration:none;font-weight:700}
+a.wid:hover{text-decoration:underline}
+.ttl{font-weight:600}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11.5px;font-weight:700;white-space:nowrap}
+.pill.ok{background:#e6f4ea;color:#0f7a43}.pill.act{background:#e8f0fe;color:#1557b0}
+.pill.warn{background:#fff4e0;color:#8a5300}.pill.new{background:#efeaff;color:#5533c9}
+.pill.mut{background:#eef1f5;color:#4a5a6c}
+.ratio{display:flex;align-items:center;gap:8px;min-width:104px}
+.track{flex:1;height:6px;background:#e9edf3;border-radius:999px;overflow:hidden}
+.fill{height:100%;border-radius:999px}
+.fill.ok{background:var(--ok)}.fill.mid{background:#e0a100}.fill.low{background:#c9d2de}
+.ratio span{font-size:12px;color:var(--mut);font-variant-numeric:tabular-nums;min-width:32px}
+.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12.5px;color:#33475e}
+.empty{color:var(--mut);font-size:13.5px;padding:6px 2px}
+.notes{background:#fffdf5;border:1px solid #f2e6c8;border-radius:12px;padding:16px 20px;margin-top:26px}
+.notes h4{margin:0 0 8px;font-size:14px}
+.notes ul{margin:0;padding-left:18px;font-size:13px;color:#4a4232}
+.notes li{margin:5px 0}
+.fix{background:linear-gradient(135deg,#0b1220,#173152);color:#e8f1fa;border-radius:14px;
+padding:20px 22px;margin-top:22px}
+.fix h4{margin:0 0 10px;font-size:16px;color:#fff}
+.fix ol{margin:0;padding-left:20px;font-size:13.5px;color:#c9dcef}
+.fix li{margin:7px 0}
+.fix b{color:#fff}
+.foot{margin-top:30px;font-size:12px;color:#8494a6;text-align:center;line-height:1.7}
+@media(max-width:820px){.kpis{grid-template-columns:repeat(2,1fr)}h1{font-size:25px}
+.hero{padding:30px 0 26px}.verdict p{font-size:16px}}
+</style></head><body><div style="background:#101c2b;color:#dbe6f2;font:12.5px/1.6 'Segoe UI',-apple-system,Roboto,Arial,sans-serif;padding:9px 20px;text-align:center">Archived run <b>2026-11-06 · 14:26</b> — frozen snapshot · <a href="../" style="color:#8fbaff;text-decoration:none">latest board-hygiene-c15-c17 report →</a> · <a href="../../" style="color:#8fbaff;text-decoration:none">all reports</a></div>
+<div class="hero"><div class="wrap">
+<div class="eyebrow">AFusion · PMO / QT34 control validation</div>
+<h1>Controls #15 &amp; #17 — Sprint 6 and Sprint 7</h1>
+<div class="sub">Effort coverage on estimated work, and whether parent state matches the actual state of its children. Read-only audit — nothing was changed on the board.</div>
+<div class="badge">Snapshot 2026-11-06 14:14:10 +0700 · AFusion Team · 619 sprint items read</div>
+</div></div>
+<div class="wrap">
+<div class="verdict bad"><div class="vlabel">Verdict</div><p>4 defects across Sprint 6 and Sprint 7 — 1 missing estimate (C15), 3 parent-state mismatches (C17).</p></div>
+<div class="kpis">
+<div class="kpi red"><div class="n">1</div><div class="l">C15 gaps</div><div class="d">of 30 open PBI/Bug/Feature/Epic</div></div>
+<div class="kpi red"><div class="n">3</div><div class="l">C17 mismatches</div><div class="d">of 107 judged parents</div></div>
+<div class="kpi blu"><div class="n">619</div><div class="l">Items in scope</div><div class="d">294 Sprint 6 · 325 Sprint 7</div></div>
+<div class="kpi amb"><div class="n">42</div><div class="l">Exempt containers</div><div class="d">Epic/Feature — not judged</div></div>
+</div>
+<div class="method"><b>Method.</b> Sprints resolved by exact path — AFusion\Projects Development\Sprint 6 (2026-10-12 → 2026-10-23) · AFusion\Projects Development\Sprint 7 (2026-10-26 → 2026-11-06). Scope = every work item under those iteration paths, plus every parent they point at (parents often live in an older sprint). Children are read from the parent's own hierarchy links, deduped, and <b>Removed</b> children ignored. C17 judges PBI/Bug/Task parents only — Epics and Features are excluded by team policy and listed separately. C15 follows the audit's definition: <b>Effort</b> on open PBI/Bug/Feature/Epic.</div>
+<div class="sec"><h2>Control #15 — effort recorded</h2>
+<h3>Sprint 6</h3>
+<p class="lead">2026-10-12 → 2026-10-23 · 294 items · 10 open PBI/Bug/Feature/Epic · 9 with Effort</p>
+<div class="card"><h4>Effort coverage <span class="tag fail">FAIL</span></h4>
+<p class="meta">9/10 estimated</p>
+<div class="tscroll"><table><thead><tr><th>Work item</th><th>Type</th><th>State</th><th>Effort</th><th>Owner</th><th>Iteration</th><th>Created</th></tr></thead><tbody>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/49868" target="_blank">#49868</a> <span class="ttl">Migrate Reconciliation workflow to RPA Orchestrator system</span></td><td>Feature</td><td><span class="pill act">In Progress</span></td><td class="mono">—</td><td>Thuong Le Anh</td><td class="mono">Sprint 6</td><td class="mono">2026-05-05<br><span style="color:#8494a6">185 days ago</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="sec"><h2>Control #17 — state reflects progress</h2>
+<h3>Sprint 6</h3>
+<p class="lead">65 parent items judged · 0 lagging · 0 closed early · 30 Epic/Feature containers exempt</p>
+<div class="card"><h4>Lagging parents — all children Done, parent still open <span class="tag pass">PASS</span></h4>
+<p class="meta">A parent whose every live child is Done should be Done too. Children marked Removed are ignored.</p>
+<div class="empty">No lagging parents in this sprint.</div>
+</div>
+<div class="card"><h4>Prematurely closed — parent Done with open children <span class="tag pass">PASS</span></h4>
+<p class="meta">The same defect inverted: work looks delivered while a child is still open.</p>
+<div class="empty">No parent is closed ahead of its children.</div>
+</div>
+<div class="card"><h4>Exempt containers <span class="tag pass" style="background:#eef1f5;color:#4a5a6c">INFO</span></h4>
+<p class="meta">Epic/Feature items are long-lived on this board and are not judged by C17 — shown so the reader can see they were considered, with their child ratios.</p>
+<div class="tscroll"><table><thead><tr><th>Container</th><th>Type</th><th>State</th><th>Children done</th><th>Owner</th></tr></thead><tbody>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/47037" target="_blank">#47037</a> <span class="ttl">Highlands Coffee</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>3/3</span></div></td><td>Ngan Pham Thi Bich</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/47328" target="_blank">#47328</a> <span class="ttl">Hyper Supports</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>6/6</span></div></td><td>Thuong Le Anh</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/50749" target="_blank">#50749</a> <span class="ttl">Miscellaneous supporting</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>3/3</span></div></td><td>Khang Nguyen Le Dinh</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/52831" target="_blank">#52831</a> <span class="ttl">Generate Cleaning Report Process</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>15/15</span></div></td><td>Vinh Ly The</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53669" target="_blank">#53669</a> <span class="ttl">JH Cleanning</span></td><td class="mono">Epic</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>3/3</span></div></td><td>Khanh Dinh Quoc</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54028" target="_blank">#54028</a> <span class="ttl">Hyper Supports</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>2/2</span></div></td><td>Hung Tran My</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54030" target="_blank">#54030</a> <span class="ttl">Hyper Supports</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>2/2</span></div></td><td>Phong Phan Hoai</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54032" target="_blank">#54032</a> <span class="ttl">Hyper Supports</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>2/2</span></div></td><td>Ngan Pham Thi Bich</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54034" target="_blank">#54034</a> <span class="ttl">Hyper Supports</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>5/5</span></div></td><td>Ngan Pham Thi Bich</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54036" target="_blank">#54036</a> <span class="ttl">Hyper Supports</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>2/2</span></div></td><td>Ngan Pham Thi Bich</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54038" target="_blank">#54038</a> <span class="ttl">Hyper Supports</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>2/2</span></div></td><td>Hung Tran My</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54040" target="_blank">#54040</a> <span class="ttl">Hyper Supports</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>2/2</span></div></td><td>Phong Phan Hoai</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54043" target="_blank">#54043</a> <span class="ttl">Hyper Supports</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>1/1</span></div></td><td>Hung Tran My</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54045" target="_blank">#54045</a> <span class="ttl">Hyper Supports</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>2/2</span></div></td><td>Thuong Le Anh</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54094" target="_blank">#54094</a> <span class="ttl">Hyper Supports</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>2/2</span></div></td><td>Khanh Dinh Quoc</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55471" target="_blank">#55471</a> <span class="ttl">Individual Report Generation</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>12/12</span></div></td><td>Hung Hoang</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58914" target="_blank">#58914</a> <span class="ttl">Hyper Support</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>4/4</span></div></td><td>Ngan Pham Thi Bich</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60386" target="_blank">#60386</a> <span class="ttl">Phuc Long</span></td><td class="mono">Epic</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>1/1</span></div></td><td>Thuong Le Anh</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60388" target="_blank">#60388</a> <span class="ttl">GRN PoC – Automated Validation, Review and Notification</span></td><td class="mono">Feature</td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>3/3</span></div></td><td>Thuong Le Anh</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/46979" target="_blank">#46979</a> <span class="ttl">Highlands Coffee</span></td><td class="mono">Epic</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill low" style="width:44%"></div></div><span>4/9</span></div></td><td>Thuong Le Anh</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/47026" target="_blank">#47026</a> <span class="ttl">Non-PO Workflow</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill mid" style="width:86%"></div></div><span>6/7</span></div></td><td>Khang Nguyen Le Dinh</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/48201" target="_blank">#48201</a> <span class="ttl">Starbucks</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill mid" style="width:80%"></div></div><span>4/5</span></div></td><td>Ngan Pham Thi Bich</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/48784" target="_blank">#48784</a> <span class="ttl">PO Migrating  from iAutobot to AI Agent system</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill mid" style="width:75%"></div></div><span>3/4</span></div></td><td>Khanh Dinh Quoc</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/49868" target="_blank">#49868</a> <span class="ttl">Migrate Reconciliation workflow to RPA Orchestrator system</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill low" style="width:0%"></div></div><span>0/2</span></div></td><td>Thuong Le Anh</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/51678" target="_blank">#51678</a> <span class="ttl">PO Workflow Migrating</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill mid" style="width:89%"></div></div><span>16/18</span></div></td><td>Khang Nguyen Le Dinh</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53760" target="_blank">#53760</a> <span class="ttl">DxR - Invoice Trainning</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill mid" style="width:50%"></div></div><span>1/2</span></div></td><td>Phong Phan Hoai</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53839" target="_blank">#53839</a> <span class="ttl">AI-Assisted Development Acceleration</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill low" style="width:29%"></div></div><span>2/7</span></div></td><td>Ngoc Nguyen Thi Bich</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54172" target="_blank">#54172</a> <span class="ttl">Maintenance System</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill low" style="width:0%"></div></div><span>0/1</span></div></td><td>Hung Hoang</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54711" target="_blank">#54711</a> <span class="ttl">AP Process</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill low" style="width:29%"></div></div><span>4/14</span></div></td><td>Sang Luong Tan</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55475" target="_blank">#55475</a> <span class="ttl">Cleaning Service Report Generation</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill mid" style="width:93%"></div></div><span>13/14</span></div></td><td>Hung Hoang</td></tr>
+</tbody></table></div></div>
+<div class="sec"><h2>Control #15 — effort recorded</h2>
+<h3>Sprint 7</h3>
+<p class="lead">2026-10-26 → 2026-11-06 · 325 items · 20 open PBI/Bug/Feature/Epic · 20 with Effort</p>
+<div class="card"><h4>Effort coverage <span class="tag pass">PASS</span></h4>
+<p class="meta">20/20 estimated — every open estimated-type item carries an Effort value.</p>
+<div class="empty">No gaps — nothing to fix for this control in this sprint.</div>
+</div>
+<div class="sec"><h2>Control #17 — state reflects progress</h2>
+<h3>Sprint 7</h3>
+<p class="lead">42 parent items judged · 2 lagging · 1 closed early · 12 Epic/Feature containers exempt</p>
+<div class="card"><h4>Lagging parents — all children Done, parent still open <span class="tag fail">FAIL</span></h4>
+<p class="meta">A parent whose every live child is Done should be Done too. Children marked Removed are ignored.</p>
+<div class="tscroll"><table><thead><tr><th>Parent</th><th>State</th><th>Children done</th><th>Owner</th><th>Iteration</th><th>Last child closed</th></tr></thead><tbody>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60747" target="_blank">#60747</a> <span class="ttl">Workflow test case building and e2e test running</span><div class="mono" style="color:#8494a6">Product Backlog Item</div></td><td><span class="pill act">Committed</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>5/5</span></div></td><td>Khang Nguyen Le Dinh</td><td class="mono">Sprint 7</td><td class="mono">2026-11-06<br><span style="color:#8494a6">today</span></td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/62006" target="_blank">#62006</a> <span class="ttl">Research Maxim-SSC Project</span><div class="mono" style="color:#8494a6">Product Backlog Item</div></td><td><span class="pill new">New</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>1/1</span></div></td><td>Khanh Le Gia</td><td class="mono">Sprint 7</td><td class="mono">2026-11-06<br><span style="color:#8494a6">today</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="card"><h4>Prematurely closed — parent Done with open children <span class="tag fail">FAIL</span></h4>
+<p class="meta">The same defect inverted: work looks delivered while a child is still open.</p>
+<div class="tscroll"><table><thead><tr><th>Parent</th><th>State</th><th>Children done</th><th>Open child</th><th>Owner</th><th>Iteration</th></tr></thead><tbody>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/53935" target="_blank">#53935</a> <span class="ttl">Attendance Rules Engine &amp; Daily Results Processing</span><div class="mono" style="color:#8494a6">Product Backlog Item</div></td><td><span class="pill ok">Done</span></td><td><div class="ratio"><div class="track"><div class="fill mid" style="width:97%"></div></div><span>28/29</span></div></td><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/58130" target="_blank">#58130</a> <span class="ttl">[JH Cleaning]Case trên Tracker &quot;AL&quot; or &quot;MC&quot; or một loại nghỉ khác nhưng trên Frontier để NPL</span> <span class="pill new">New</span><div class="mono" style="color:#8494a6">Thuong Le Anh</div></td><td>Thuong Le Anh</td><td class="mono">Sprint 4</td></tr>
+</tbody></table></div>
+</div>
+<div class="card"><h4>Exempt containers <span class="tag pass" style="background:#eef1f5;color:#4a5a6c">INFO</span></h4>
+<p class="meta">Epic/Feature items are long-lived on this board and are not judged by C17 — shown so the reader can see they were considered, with their child ratios.</p>
+<div class="tscroll"><table><thead><tr><th>Container</th><th>Type</th><th>State</th><th>Children done</th><th>Owner</th></tr></thead><tbody>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60386" target="_blank">#60386</a> <span class="ttl">Phuc Long</span></td><td class="mono">Epic</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill ok" style="width:100%"></div></div><span>1/1</span></div></td><td>Thuong Le Anh</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/47026" target="_blank">#47026</a> <span class="ttl">Non-PO Workflow</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill mid" style="width:86%"></div></div><span>6/7</span></div></td><td>Khang Nguyen Le Dinh</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/48201" target="_blank">#48201</a> <span class="ttl">Starbucks</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill mid" style="width:80%"></div></div><span>4/5</span></div></td><td>Ngan Pham Thi Bich</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/49868" target="_blank">#49868</a> <span class="ttl">Migrate Reconciliation workflow to RPA Orchestrator system</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill low" style="width:0%"></div></div><span>0/2</span></div></td><td>Thuong Le Anh</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/51678" target="_blank">#51678</a> <span class="ttl">PO Workflow Migrating</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill mid" style="width:89%"></div></div><span>16/18</span></div></td><td>Khang Nguyen Le Dinh</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54057" target="_blank">#54057</a> <span class="ttl">AI Agent Server</span></td><td class="mono">Epic</td><td><span class="pill warn">In Review</span></td><td><div class="ratio"><div class="track"><div class="fill low" style="width:0%"></div></div><span>0/5</span></div></td><td>Hung Hoang</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54175" target="_blank">#54175</a> <span class="ttl">PO Team</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill mid" style="width:75%"></div></div><span>3/4</span></div></td><td>Nhan Pham Vu Phuc</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/54711" target="_blank">#54711</a> <span class="ttl">AP Process</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill low" style="width:29%"></div></div><span>4/14</span></div></td><td>Sang Luong Tan</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/55475" target="_blank">#55475</a> <span class="ttl">Cleaning Service Report Generation</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill mid" style="width:93%"></div></div><span>13/14</span></div></td><td>Hung Hoang</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/57704" target="_blank">#57704</a> <span class="ttl">Enhancement</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill mid" style="width:50%"></div></div><span>1/2</span></div></td><td>Hung Hoang</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/59698" target="_blank">#59698</a> <span class="ttl">AI Insight</span></td><td class="mono">Feature</td><td><span class="pill warn">Planned</span></td><td><div class="ratio"><div class="track"><div class="fill low" style="width:0%"></div></div><span>0/12</span></div></td><td>Khang Nguyen Le Dinh</td></tr>
+<tr><td><a class="wid" href="https://devops.imt-soft.com/Inheritance/AFusion/_workitems/edit/60620" target="_blank">#60620</a> <span class="ttl">Client Hyper Support</span></td><td class="mono">Feature</td><td><span class="pill act">In Progress</span></td><td><div class="ratio"><div class="track"><div class="fill low" style="width:0%"></div></div><span>0/1</span></div></td><td>Ngoc Nguyen Thi Bich</td></tr>
+</tbody></table></div></div>
+<div class="notes"><h4>Notes &amp; caveats</h4><ul>
+<li>The daily audit builds its parent map from items in the sprint only; this validation reads each parent's own child links, so it also sees children parked in other sprints. That is why Sprint 7 shows #53935 — its parent sits in Sprint 4 with a child in Sprint 7.</li>
+<li>Feature #49868 (<i>Migrate Reconciliation workflow to RPA Orchestrator system</i>) has no Effort and is the only C15 gap. It is counted once, under Sprint 6 where it lives, though it is also a parent of Sprint 7 work.</li>
+<li>11 open Epic/Feature containers outside the two sprints carry no Effort either. They are outside C15's sprint scope, but if the intent is "every estimated item has a number", that bucket is the next conversation.</li>
+<li>Epic/Feature parents are excluded from C17 by team policy (42 containers skipped across both sprints). Several have all children Done and are still open — that is expected here, not a finding.</li>
+<li>Every flagged item was re-read immediately before rendering — no state moved during collection.</li>
+<li>Counts are a snapshot at 2026-11-06 14:14:10 +0700; the board is live and moves.</li>
+</ul></div>
+<div class="fix"><h4>Suggested fixes — 4 items, nothing applied yet</h4><ol>
+<li><b>#60747</b> <i>Workflow test case building and e2e test running</i> — all 5 tasks are Done (last one closed today). Move the PBI to <b>Done</b>.</li>
+<li><b>#62006</b> <i>Research Maxim-SSC Project</i> — its only task #62009 is Done. Close the PBI, or add the follow-up tasks it was meant to spawn.</li>
+<li><b>#53935</b> <i>Attendance Rules Engine &amp; Daily Results Processing</i> — Done since 2026-10-22 with Defect <b>#58130</b> still New. Either reopen the PBI, or move #58130 to a sprint where it will actually be worked.</li>
+<li><b>#49868</b> <i>Migrate Reconciliation workflow to RPA Orchestrator system</i> — set an Effort (or split it into estimated PBIs) before it enters a sprint.</li>
+</ol></div>
+<div class="foot">Board Hygiene · AFusion PMO control validation · controls #15 and #17<br>Read-only run — no work item was modified. Snapshot 2026-11-06 14:14:10 +0700</div>
+</div></body></html>
