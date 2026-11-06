@@ -46,5 +46,11 @@
   "updated": "2026-11-06T14:26:47+07:00",
   "url": "https://khangnld-imt.github.io/afusion-reports/board-hygiene-c15-c17/",
   "summary": "Control validation: 4 defects across Sprint 6 and 7 \u2014 1 missing estimate (C15), 3 parent-state mismatches (C17). Read-only."
+ },
+ "sprint8-carryover": {
+  "title": "Sprint 7 \u2192 Sprint 8 Carry-over \u00b7 AFusion",
+  "updated": "2026-11-06T16:00:18+07:00",
+  "url": "https://khangnld-imt.github.io/afusion-reports/sprint8-carryover/",
+  "summary": "8 PBIs cloned \u00b7 11 moved whole \u00b7 3 closed \u00b7 110 items \u00b7 182h carried"
  }
 }
