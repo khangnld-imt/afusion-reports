@@ -40,5 +40,11 @@
   "updated": "2026-11-06T00:44:52+07:00",
   "url": "https://khangnld-imt.github.io/afusion-reports/ado-effort-backfill-s6-s7/",
   "summary": "2 blank-Effort PBIs filled from child CompletedWork (65 h)"
+ },
+ "board-hygiene-c15-c17": {
+  "title": "Board Hygiene \u2014 Controls #15 & #17 (Sprint 6 & 7)",
+  "updated": "2026-11-06T14:24:59+07:00",
+  "url": "https://khangnld-imt.github.io/afusion-reports/board-hygiene-c15-c17/",
+  "summary": "Control validation: 4 defects across Sprint 6 and 7 \u2014 1 missing estimate (C15), 3 parent-state mismatches (C17). Read-only."
  }
 }
